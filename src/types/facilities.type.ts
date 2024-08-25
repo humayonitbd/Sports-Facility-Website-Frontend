@@ -11,3 +11,9 @@ export type TFacilities= {
   updatedAt: string;
   __v: number;
 }
+
+export type TAvailableTime ={
+  startTime: string;
+  endTime: string;
+}
+
