@@ -4,6 +4,7 @@ import { RootState } from "../../store";
 export type TUser = {
   email: string;
   role: string;
+  userId:string;
   iat: number;
   exp: number;
 } | null;
@@ -28,6 +29,7 @@ const authSlice = createSlice({
     },
 
     logOut: (state) => {
+      console.log('logout hoise')
       state.user = null;
       state.token = null;
     },

@@ -6,7 +6,13 @@ import CustomButton from "../ui/CustomButton";
 import { NavLink } from "react-router-dom";
 import { navbarPaths } from "../../routes/main.routes";
 import { FaUser } from "react-icons/fa6";
+import { useDispatch } from "react-redux";
 import logo from "../../assets/logo/logo.png";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { TUser, logOut, useCurrentToken } from "../../redux/features/auth/authSlice";
+import { verifyToken } from "../../utils/verifyToken";
+import authApi from "../../redux/features/auth/authApi";
+import Swal from "sweetalert2";
 
 
 
@@ -16,61 +22,74 @@ const { Header} = Layout;
 const { useBreakpoint } = Grid;
 
 const userRole = {
-    ADMIN: 'admin',
-    USER: 'user',
-}
+  USER_ADMIN: "userAdmin",
+ 
+};
 const MenuBar = () => {
   const screens = useBreakpoint();
   const contentPadding = screens.md ? "50px 100px" : "0 0";
-    const user = {
-        role:'user',
-        email:''
-    }
+  const token = useAppSelector(useCurrentToken);
+   const dispatch = useDispatch();
+  
+   let user: TUser | undefined;
+
+  if (token) {
+    user = verifyToken(token);
+  }
+  //  console.log('menubar user', user)
+  const { data: dbUser } = authApi.useUserGetQuery(user?.userId);
+  // console.log("dbUser", dbUser?.data);
+  const userAdmin = {
+    role:'userAdmin'
+  }
+
+  // console.log("user", user);
      let navbarItems;
     //  console.log("navbarItems", navbarItems);
 
-     switch (user?.role) {
-       case userRole.ADMIN:
+     switch (userAdmin?.role) {
+       case userRole.USER_ADMIN:
          navbarItems = navbarItemGenerator(navbarPaths);
          break;
-       case userRole.USER:
+       case userRole.USER_ADMIN:
          navbarItems = navbarItemGenerator(navbarPaths);
          break;
-       
+
        default:
          break;
      }
 
+     const logOutHandler=async()=>{
+      const res = await dispatch(logOut());
+      if (res.type === "auth/logOut") {
+        // Check the correct action type
+        Swal.fire({
+          icon: "success",
+          title: `Logout Successful!`,
+          showConfirmButton: false,
+          timer: 1100,
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: `Logout Failed!`,
+          showConfirmButton: false,
+          timer: 1100,
+        });
+      }
+      // console.log('logout handler', res)
+     }
 
      const items = [
        {
          key: "1",
          label: (
-           <NavLink
-             target="_blank"
-             rel="noopener noreferrer"
-             to={`/${user.role}/dashboard`}
+           <Button
+             style={{ background: "#0566FF", color:'#fff' }}
+             onClick={logOutHandler}
            >
-             <CustomButton>Dashboard</CustomButton>
-           </NavLink>
-         ),
-       },
-       {
-         key: "2",
-         label: user?.email ? (
-           <CustomButton>Logout</CustomButton>
-         ) : (
-           <NavLink
-             to={`/login`}
-             style={{
-               textDecoration: "none",
-               padding: "0 5px",
-               fontSize: "16px",
-               color: "#001529",
-             }}
-           >
-             <CustomButton>Login</CustomButton>
-           </NavLink>
+             Logout
+           </Button>
          ),
        },
      ];
@@ -128,8 +147,8 @@ const MenuBar = () => {
             gap: "10px",
           }}
         >
-          <NavLink
-            to={`/${user.role}/dashboard`}
+          {user?.email && <NavLink
+            to={`/${user?.role}/dashboard`}
             style={{
               textDecoration: "none",
               padding: "0 5px",
@@ -138,11 +157,9 @@ const MenuBar = () => {
             }}
           >
             <CustomButton>Dashboard</CustomButton>
-          </NavLink>
-          {user?.email ? (
-            <CustomButton>logout</CustomButton>
-          ) : (
-            <NavLink
+          </NavLink>}
+          {
+             !user?.email && <NavLink
               to={`/login`}
               style={{
                 textDecoration: "none",
@@ -153,46 +170,27 @@ const MenuBar = () => {
             >
               <CustomButton>Login</CustomButton>
             </NavLink>
-          )}
-          <div
-            style={{
-              paddingTop: "20px",
-              display: screens.md ? "block" : "none",
-            }}
+          }
+          
+          {user && user.email && <div
           >
-            <FaUser
-              style={{
-                fontSize: "35px",
-                border: "2px solid rgb(0, 69, 179)",
-                borderRadius: "100%",
-                padding: "5px",
-                backgroundColor: "rgb(0, 69, 179)",
-                color: "#fff",
-              }}
-            />
-          </div>
+            <Dropdown menu={{ items }} placement="bottom">
+              
+              <Image
+                src={dbUser?.data?.profileImg}
+                preview={false}
+                style={{
+                  width: "45px", 
+                  height: "45px", 
+                  borderRadius:'100%'
+                }}
+              />
+            </Dropdown>
+          </div>}
+
         </div>
       </div>
-      <div
-        style={{
-          marginLeft: "5px",
-          paddingTop: "20px",
-          display: screens.md ? "none" : "block",
-        }}
-      >
-        <Dropdown menu={{ items }} placement="bottom">
-          <FaUser
-            style={{
-              fontSize: "35px",
-              border: "2px solid rgb(0, 69, 179)",
-              borderRadius: "100%",
-              padding: "5px",
-              backgroundColor: "rgb(0, 69, 179)",
-              color: "#fff",
-            }}
-          />
-        </Dropdown>
-      </div>
+     
     </Header>
   );
 };

@@ -6,6 +6,9 @@ import { NavLink } from "react-router-dom";
 import { userdashboardPaths } from "../../routes/user.dashboard.routes";
 import { dbSideItemGenerator } from "../../utils/dbSideItemGenerator";
 import { FaUser} from "react-icons/fa";
+import { useAppSelector } from "../../redux/hooks";
+import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
+import { verifyToken } from "../../utils/verifyToken";
 
 const userRole = {
   ADMIN: "admin",
@@ -15,12 +18,15 @@ const userRole = {
 const { Sider } = Layout;
 const AdminSidebar = () => {
   //   const user = useAppSelector(selectCurrentUser);
-  const user = {
-    role: "user",
-  };
+  const token = useAppSelector(useCurrentToken);
+  let user: TUser | undefined;
+
+  if (token) {
+    user = verifyToken(token);
+  }
 
   let sidebarItems;
-  console.log("sidebarItems", sidebarItems);
+  
 
   switch (user?.role) {
     case userRole.ADMIN:

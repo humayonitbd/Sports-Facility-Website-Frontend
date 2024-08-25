@@ -2,6 +2,7 @@ import { Col, Row, Divider } from "antd";
 import {Image} from "antd"
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import footerlog from "../../../assets/logo/logo.png"
 
 const FooterSec = () => {
   return (
@@ -14,10 +15,9 @@ const FooterSec = () => {
                 <Image
                   width={200}
                   height={50}
-                  src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png?x-oss-process=image/blur,r_50,s_50/quality,q_1/resize,m_mfit,h_200,w_200"
-                  // preview={{
-                  //   src: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-                  // }}
+                  src={footerlog}
+                  preview={false}
+                
                 />
                 <p
                   style={{ padding: "20px 0", color: "#fff", fontSize: "17px" }}
@@ -265,9 +265,7 @@ const FooterSec = () => {
           <Row gutter={24}>
             <Col span={24}>
               <span>
-                <Divider
-                  style={{ borderColor: "#fff", }}
-                />
+                <Divider style={{ borderColor: "#fff" }} />
               </span>
               <div
                 style={{

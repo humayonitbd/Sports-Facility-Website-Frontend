@@ -3,27 +3,63 @@ import CustomInput from "../../../components/Form/CustomInput";
 import CustomForm from "../../../components/Form/CustomForm";
 import { FieldValues } from "react-hook-form";
 import loginImage from "../../../assets/login images/logn image.jpg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import authApi from "../../../redux/features/auth/authApi";
+import { useAppDispatch } from "../../../redux/hooks";
+import Swal from "sweetalert2";
+import { setUser } from "../../../redux/features/auth/authSlice";
+import { verifyToken } from "../../../utils/verifyToken";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginZodSchema } from "../../../Schemas/login.zod.schema";
 
 const Login = () => {
   const defaultValues = {
-    email: "user3@gmail.com",
+    email: "user@gmail.com",
     password: "123456",
   };
+const navigate = useNavigate();
+  const [loginHandler] = authApi.useLoginMutation();
+  const dispatch = useAppDispatch();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const onSubmit = async (data: FieldValues) => {
     console.log("data", data);
 
-    try {
-      const userInfo = {
-        email: data.email,
-        password: data.password,
-      };
+        try {
+        
+          const loginData = {
+            email: data.email,
+            password: data.password,
+          };
+          const res: any = await loginHandler(loginData).unwrap();
+          console.log('login res', res)
+          const jwtToken = res?.token;
+          const user = verifyToken(jwtToken);
+          dispatch(setUser({ user: user, token: res?.token }));
+          if (res?.success) {
+            Swal.fire({
+              icon: "success",
+              title: `${res.message}`,
+              showConfirmButton: false,
+              timer: 1000,
+            });
+           
+            navigate(from, { replace: true });
+          }
+        } catch (error: any) {
+          if (error?.data.success === false) {
+            Swal.fire({
+              icon: "error",
+              title: `${
+                error?.data?.message || "An error occurred during login!"
+              }`,
+              showConfirmButton: false,
+              timer: 1200,
+            });
+          }
+        }
 
-      console.log(userInfo);
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   return (
@@ -78,7 +114,11 @@ const Login = () => {
             >
               Login Here!
             </h2>
-            <CustomForm onSubmit={onSubmit} defaultValues={defaultValues}>
+            <CustomForm
+              onSubmit={onSubmit}
+              resolver={zodResolver(loginZodSchema)}
+              defaultValues={defaultValues}
+            >
               <CustomInput type="text" name="email" label="Email: " />
               <CustomInput type="password" name="password" label="Password: " />
               <div style={{ textAlign: "center" }}>

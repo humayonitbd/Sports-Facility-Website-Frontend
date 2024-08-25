@@ -1,6 +1,7 @@
 import About from "../pages/About/About";
 import Contact from "../pages/Contact/Contact";
 import Facilities from "../pages/Facilities/Facilities";
+import FeaturedFacilityDetails from "../pages/FeaturedFacilities/FeaturedFacilityDetails";
 import LandingPage from "../pages/LandingPage/LandingPage/LandingPage";
 import Login from "../pages/Login/Login/Login";
 
@@ -24,6 +25,11 @@ export const navbarPaths = [
     name: "Facilities",
     path: "facilities",
     element: <Facilities />,
+  },
+  {
+    
+    path: "facilities/:id",
+    element: <FeaturedFacilityDetails />,
   },
   {
     name: "About",

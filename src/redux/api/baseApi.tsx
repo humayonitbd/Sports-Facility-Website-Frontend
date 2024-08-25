@@ -25,13 +25,13 @@ interface Result {
 
 
 const baseQuery = fetchBaseQuery({
-  // baseUrl: "https://online-nursery-backend.vercel.app/api/v1",
-  baseUrl: "http://localhost:5000/api/v1",
+  // baseUrl: "https://online-nursery-backend.vercel.app/api",
+  baseUrl: "http://localhost:5000/api",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
     if (token) {
-      headers.set("authorization", `${token}`);
+      headers.set("authorization", `Bearer ${token}`);
     }
     return headers;
   },
@@ -56,7 +56,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   if (result?.error?.status === 401) {
     try {
       const res = await fetch(
-        "http://localhost:5000/api/v1/auth/refresh-token",
+        "http://localhost:5000/api/auth/refresh-token",
         {
           method: "POST",
           credentials: "include",
@@ -66,9 +66,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
       const data = await res.json();
       if (data?.data?.accessToken) {
         const user = (api.getState() as RootState).auth.user;
-        // const user = verifyToken(data?.data?.accessToken);
-        // console.log('user refresh api', user);
-        // console.log("user refresh api", data?.data?.accessToken);
+      
         api.dispatch(setUser({ user, token: data.data.accessToken }));
         // Retry the original query with the new token
         result = await baseQuery(args, api, extraOptions);
@@ -88,6 +86,6 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: baseQueryWithRefreshToken,
-  tagTypes: ["category", "product", 'orderProduct', 'reviews', 'reviewsLike','replayReview'],
+  tagTypes: ['userLogin'],
   endpoints: () => ({}),
 });
