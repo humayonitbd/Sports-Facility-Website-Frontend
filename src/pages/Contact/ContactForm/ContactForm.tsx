@@ -4,6 +4,9 @@ import CustomForm from "../../../components/Form/CustomForm";
 import CustomInput from "../../../components/Form/CustomInput";
 import { Button } from "antd";
 import { CSSProperties } from "react";
+// import emailjs from "@emailjs/browser";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ContactZodSchema } from "../../../Schemas/contact.zod.schema";
 
 const ContactForm = () => {
   const onSubmit = async (data: FieldValues) => {
@@ -16,19 +19,27 @@ const ContactForm = () => {
         subject: data.subject,
         message: data.message,
       };
-      console.log("Contact data", contactData);
+
+    //   console.log("Contact data", contactData);
+    //   const result = await emailjs.sendForm(
+    //     "service_l0ciyxo",
+    //     "template_7nilc3p",
+    //     form.current,
+    //     "fF1Gb1UK-6c2QbJFr"
+    //   );
+
+    //   console.log(result.text);
+    if(contactData)
+      Swal.fire({
+        title: "Message was sent successfully!!",
+        text: "You clicked the button!",
+        icon: "success",
+        timer: 1200,
+      });
+      
 
       // Add your API call here if needed
 
-      // Uncomment and adjust success message
-      // if (res?.success) {
-      //   Swal.fire({
-      //     icon: "success",
-      //     title: `${res.message}`,
-      //     showConfirmButton: false,
-      //     timer: 1000,
-      //   });
-      // }
     } catch (error: any) {
       Swal.fire({
         icon: "error",
@@ -50,14 +61,15 @@ const ContactForm = () => {
   };
 
   const buttonStyle: CSSProperties = {
-    backgroundColor: "#003180",
+    backgroundColor: "#2C79FF",
     color: "#ffffff",
     border: "none",
     borderRadius: "4px",
-    padding: "10px 20px",
+    padding: "20px 20px",
     fontSize: "16px",
     cursor: "pointer",
     transition: "background-color 0.3s",
+    width: "100%",
   };
 
   
@@ -65,7 +77,10 @@ const ContactForm = () => {
   return (
     <div style={{ background: "#2c79ff", padding: "50px 0" }}>
       <div style={formContainerStyle}>
-        <CustomForm onSubmit={onSubmit}>
+        <CustomForm
+          onSubmit={onSubmit}
+          resolver={zodResolver(ContactZodSchema)}
+        >
           <CustomInput
             type="text"
             name="name"
