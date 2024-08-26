@@ -1,4 +1,3 @@
-
 import { Form, Input } from "antd";
 import { Controller } from "react-hook-form";
 
@@ -6,9 +5,10 @@ type TInputProps = {
   type?: string;
   name: string;
   label?: string;
+  style?: React.CSSProperties; 
 };
 
-const CustomInput = ({ type = "text", name, label }: TInputProps) => {
+const CustomInput = ({ type = "text", name, label, style }: TInputProps) => {
   return (
     <div style={{ marginBottom: "10px" }}>
       <Controller
@@ -21,18 +21,18 @@ const CustomInput = ({ type = "text", name, label }: TInputProps) => {
               id={name}
               onChange={(e) => {
                 if (type === "file") {
-                  // Handle file input
                   if (e.target.files) {
-                    field.onChange(e.target.files[0]); // Pass the first file
+                    field.onChange(e.target.files[0]);
                   }
                 } else {
-                  // Handle other types of inputs
                   field.onChange(e.target.value);
                 }
               }}
               value={type === "file" ? undefined : field.value}
+              style={style}
             />
-            {error && <small style={{ color: "white" }}>{error.message}</small>}
+            {error && <small style={{ color: "red" }}>{error.message}</small>}{" "}
+            {/* Changed color to red for better visibility */}
           </Form.Item>
         )}
       />

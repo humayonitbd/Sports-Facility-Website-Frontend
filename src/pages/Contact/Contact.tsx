@@ -1,8 +1,13 @@
+import ContactDetails from "./ContactDetails/ContactDetails";
+import ContactForm from "./ContactForm/ContactForm";
+import MapIntigration from "./MapIntigration/MapIntigration";
 
 const Contact = () => {
     return (
         <div>
-            <h3>Contact Us Page</h3>
+            <ContactForm />
+            <MapIntigration />
+            <ContactDetails />
         </div>
     );
 };

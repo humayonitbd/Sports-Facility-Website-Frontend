@@ -60,9 +60,14 @@ const HowItWorks = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
+// backgroundColor: "#f2f7ff";
   return (
-    <div style={{ padding: "50px 0", backgroundColor: "#f2f7ff" }}>
+    <div
+      style={{
+        padding: "50px 0",
+        background: "linear-gradient(360deg, #d1e3ff 0%, #e8f1ff 100%)",
+      }}
+    >
       <Title
         level={2}
         style={{ textAlign: "center", marginBottom: "50px", color: "#003180" }}

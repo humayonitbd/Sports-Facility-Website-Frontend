@@ -124,6 +124,7 @@ const CustomerTestimonials = () => {
         padding: "60px 0",
         position: "relative",
         backgroundColor: "#3d88ff",
+        
       }}
     >
       <Title

@@ -35,7 +35,11 @@ const UpcomingEvents = () => {
   return (
     <div
       className="upcoming-events-container"
-      style={{ padding: "60px 20px", backgroundColor: "#f2f7ff" }}
+      style={{
+        padding: "60px 20px",
+        backgroundColor: "#f2f7ff",
+        marginBottom: "5px",
+      }}
     >
       <Title
         level={2}
