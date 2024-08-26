@@ -21,7 +21,12 @@ const FacilityCard = ({facility}:any) => {
       >
         <Card.Meta
           title={facility.name}
-          description={`Price per hour: $${facility.pricePerHour}`}
+          description={
+            <>
+              <div>Price per hour: ${facility.pricePerHour}</div>
+              <div>Location: {facility.location}</div>
+            </>
+          }
         />
         <NavLink to={`/facilities/${facility._id}`}>
           <Button type="primary" block style={{ marginTop: 16 }}>
