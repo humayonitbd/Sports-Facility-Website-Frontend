@@ -1,16 +1,14 @@
 
-import {  useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import {
   Row,
   Col,
   Card,
   Typography,
   Image,
-  DatePicker,
   TimePicker,
   Button,
   Space,
-  List,
   Form,
 } from "antd";
 import type { FormProps } from "antd";
@@ -24,11 +22,17 @@ import dayjs from "dayjs";
 import availableTimeSlotsApi from "../../redux/features/availableTimeSlots/availableTimeSlotsApi";
 import { useState } from "react";
 import bookingApi from "../../redux/features/booking/bookingApi";
+import { useAppSelector } from "../../redux/hooks";
+import Swal from "sweetalert2";
+
 
 const { Title,Text, Paragraph } = Typography;
 
 const FeaturedFacilityDetails = () => {
   const { id:facilityId } = useParams();
+  const user = useAppSelector((state)=>state.auth.user);
+  console.log('user login data', user);
+  const navigate = useNavigate();
   const { data: singleFacility } =
     facilitiesApi.useSingleFacilityGetQuery(facilityId);
     const [addBooking] = bookingApi.useAddBookingMutation();
@@ -37,6 +41,7 @@ const FeaturedFacilityDetails = () => {
   const newDate = new Date();
   const formateNewDate = moment(newDate).format("YYYY-MM-DD");
   // console.log("formatNewDate", formateNewDate);
+
   
   
   const { data: availableSlots } =
@@ -53,6 +58,20 @@ const FeaturedFacilityDetails = () => {
 
   // console.log("availableTimeSlots", availableTimeSlots);
   const onFinish: FormProps<any>["onFinish"] = async(values) => {
+
+    if(!user?.email){
+      Swal.fire({
+        icon: "success",
+        title: `You don't login user!!`,
+        showConfirmButton: false,
+        timer: 1000,
+      });
+
+      navigate('/login');
+      return;
+    }
+
+    console.log('you are login user!!')
     const startTime = values.startTime
       ? dayjs(values.startTime).format("HH:mm") 
       : null;
@@ -69,6 +88,7 @@ const FeaturedFacilityDetails = () => {
    const res = await addBooking(bookingData).unwrap();
    if (res.success) {
      console.log(res);
+     
      window.location.href = res.data.payment_url;
    } else {
      console.error("Order creation failed:", res.message);

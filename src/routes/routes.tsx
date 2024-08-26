@@ -6,12 +6,14 @@ import { userdashboardPaths } from "./user.dashboard.routes";
 import Register from "../pages/Login/Register/Register";
 import App from "../App";
 import { navbarPaths } from "./main.routes";
+import ErrorPage from "../pages/SharedPage/ErrorPage/ErrorPage";
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement:<ErrorPage />,
     children: routeGenerator(navbarPaths),
   },
 
