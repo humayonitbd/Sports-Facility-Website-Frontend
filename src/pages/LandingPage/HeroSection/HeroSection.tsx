@@ -1,65 +1,99 @@
-import { Col, Image, Row } from "antd";
-import heroImage from "../../../assets/HeroSection image/hero secton image.jpg";
-import heroImage2 from "../../../assets/login images/logn image.jpg";
-import CustomButton from "../../../components/ui/CustomButton";
+import React from "react";
+import { Button, Typography, Space, Image } from "antd";
+import heroImg from "../../../assets//HeroSection image/hero_image-2.png";
+
+const { Title, Paragraph } = Typography;
 
 const HeroSection = () => {
   return (
-    <div style={{ height: "600px", overflow: "hidden" }}>
-      <Row gutter={24} style={{ position: "relative", height: "100%" }}>
-        <Col
-          span={24}
-          style={{ position: "relative", height: "100%", padding: 0 }}
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        height: "90vh",
+        padding: "2rem",
+        backgroundColor: "rgb(229, 239, 255)",
+
+        // overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          color: "white",
+          zIndex: 2,
+          maxWidth: "50%",
+        }}
+      >
+        <Title
+          level={1}
+          style={{ color: "#003180", fontSize: "50px", fontWeight: "700" }}
         >
-          <Image
-            src={heroImage}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              filter: "brightness(70%)",
-              padding: 0,
-              margin: 0,
-            }}
-            preview={false}
-          />
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              //   backgroundColor: "rgba(0, 89, 230, 0.8)",
-              backgroundColor: "rgba(0, 89, 230, 0.7)",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              color: "#fff",
-              textAlign: "center",
-              padding: "20px",
-              margin: 0,
-            }}
-          >
-            <h2 style={{ fontSize: "36px", marginBottom: "10px" }}>
-              Elevate Your Game at Our World-Class Facility
-            </h2>
-            <p style={{ fontSize: "18px", maxWidth: "600px" }}>
-              Discover the ultimate destination for athletes of all levels. Our
-              state-of-the-art facility offers cutting-edge equipment,
-              professional coaching, and a supportive community. Whether you're
-              training for your next competition or just staying fit, we provide
-              the perfect environment to reach your goals.
-            </p>
-            <div style={{ marginTop: "16px" }}>
-              <CustomButton backgroundColor="white" textColor="#0566FF">
-                Book Now
-              </CustomButton>
-            </div>
-          </div>
-        </Col>
-      </Row>
+          "Our best sports facility booking platform"
+        </Title>
+        <Paragraph
+          style={{
+            color: "#003180",
+            fontSize: "1.25rem",
+            marginBottom: "2rem",
+          }}
+        >
+          Book your favorite sports facilities easily and efficiently. Whether
+          it’s a game night or a training session, our platform ensures a
+          seamless booking experience.
+        </Paragraph>
+        <Button
+          type="primary"
+          style={{
+            backgroundColor: "#0566FF",
+            borderColor: "#0566FF",
+            color: "white",
+            borderRadius: "5px",
+            padding: "20px 2rem",
+            fontSize: "1rem",
+            fontWeight: "600",
+            transition: "background-color 0.3s ease, border-color 0.3s ease",
+            width: "50%",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = "#004db3"; // Darker shade on hover
+            e.currentTarget.style.borderColor = "#004db3";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = "#0566FF"; // Original color
+            e.currentTarget.style.borderColor = "#0566FF";
+          }}
+        >
+         Book Now
+        </Button>
+      </div>
+      <div
+        style={{
+          flex: 1,
+          position: "relative",
+          height: "100%",
+          overflow: "hidden",
+          zIndex: 1,
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Image
+          src={heroImg}
+          alt="Hero"
+          preview={false}
+          style={{
+            width: "100%",
+            height: "100%",
+
+            // filter: "brightness(0.6)", // Darken the image slightly for better text contrast
+          }}
+        />
+      </div>
     </div>
   );
 };

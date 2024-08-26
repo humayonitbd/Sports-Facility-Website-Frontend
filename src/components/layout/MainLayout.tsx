@@ -30,7 +30,13 @@ const MainLayout = () => {
               <Outlet />
             </div>
           </Content>
-          <Footer style={{ background: "#061329", padding: contentPadding }}>
+          <Footer
+            style={{
+              background: "rgb(229, 239, 255)",
+              
+              padding: contentPadding,
+            }}
+          >
             <FooterSec />
           </Footer>
         </Layout>

@@ -17,10 +17,13 @@ const FooterSec = () => {
                   height={50}
                   src={footerlog}
                   preview={false}
-                
                 />
                 <p
-                  style={{ padding: "20px 0", color: "#fff", fontSize: "17px" }}
+                  style={{
+                    padding: "20px 0",
+                    color: "#003180",
+                    fontSize: "17px",
+                  }}
                 >
                   Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                   Debitis magni illum obcaecati nemo ipsam recusandae.
@@ -30,7 +33,7 @@ const FooterSec = () => {
                     style={{
                       fontSize: "20px",
                       color: "#fff",
-                      background: "#0566FF",
+                      background: "#003180",
                       padding: "4px 8px",
                       borderRadius: "5px",
                       cursor: "pointer",
@@ -42,7 +45,7 @@ const FooterSec = () => {
                     style={{
                       fontSize: "20px",
                       color: "#fff",
-                      background: "#0566FF",
+                      background: "#003180",
                       padding: "4px 8px",
                       borderRadius: "5px",
                       cursor: "pointer",
@@ -54,7 +57,7 @@ const FooterSec = () => {
                     style={{
                       fontSize: "20px",
                       color: "#fff",
-                      background: "#0566FF",
+                      background: "#003180",
                       padding: "4px 8px",
                       borderRadius: "5px",
                       cursor: "pointer",
@@ -66,7 +69,7 @@ const FooterSec = () => {
                     style={{
                       fontSize: "20px",
                       color: "#fff",
-                      background: "#0566FF",
+                      background: "#003180",
                       padding: "4px 8px",
                       borderRadius: "5px",
                       cursor: "pointer",
@@ -82,7 +85,7 @@ const FooterSec = () => {
                 <h4
                   style={{
                     fontSize: "24px",
-                    color: "#fff",
+                    color: "#003180",
                     marginBottom: "10px",
                   }}
                 >
@@ -92,7 +95,7 @@ const FooterSec = () => {
                   <p
                     style={{
                       fontSize: "17px",
-                      color: "#fff",
+                      color: "#003180",
                       marginBottom: "7px",
                     }}
                   >
@@ -103,7 +106,7 @@ const FooterSec = () => {
                   <p
                     style={{
                       fontSize: "17px",
-                      color: "#fff",
+                      color: "#003180",
                       marginBottom: "7px",
                     }}
                   >
@@ -114,7 +117,7 @@ const FooterSec = () => {
                   <p
                     style={{
                       fontSize: "17px",
-                      color: "#fff",
+                      color: "#003180",
                       marginBottom: "7px",
                     }}
                   >
@@ -125,7 +128,7 @@ const FooterSec = () => {
                   <p
                     style={{
                       fontSize: "17px",
-                      color: "#fff",
+                      color: "#003180",
                       marginBottom: "7px",
                     }}
                   >
@@ -136,7 +139,7 @@ const FooterSec = () => {
                   <p
                     style={{
                       fontSize: "17px",
-                      color: "#fff",
+                      color: "#003180",
                       marginBottom: "5px",
                     }}
                   >
@@ -150,7 +153,7 @@ const FooterSec = () => {
                 <h4
                   style={{
                     fontSize: "24px",
-                    color: "#fff",
+                    color: "#003180",
                     marginBottom: "10px",
                   }}
                 >
@@ -160,7 +163,7 @@ const FooterSec = () => {
                   <p
                     style={{
                       fontSize: "17px",
-                      color: "#fff",
+                      color: "#003180",
                       marginBottom: "7px",
                     }}
                   >
@@ -171,7 +174,7 @@ const FooterSec = () => {
                   <p
                     style={{
                       fontSize: "17px",
-                      color: "#fff",
+                      color: "#003180",
                       marginBottom: "7px",
                     }}
                   >
@@ -182,7 +185,7 @@ const FooterSec = () => {
                   <p
                     style={{
                       fontSize: "17px",
-                      color: "#fff",
+                      color: "#003180",
                       marginBottom: "7px",
                     }}
                   >
@@ -193,7 +196,7 @@ const FooterSec = () => {
                   <p
                     style={{
                       fontSize: "17px",
-                      color: "#fff",
+                      color: "#003180",
                       marginBottom: "7px",
                     }}
                   >
@@ -204,7 +207,7 @@ const FooterSec = () => {
                   <p
                     style={{
                       fontSize: "17px",
-                      color: "#fff",
+                      color: "#003180",
                       marginBottom: "5px",
                     }}
                   >
@@ -218,7 +221,7 @@ const FooterSec = () => {
                 <h4
                   style={{
                     fontSize: "24px",
-                    color: "#fff",
+                    color: "#003180",
                     marginBottom: "10px",
                   }}
                 >
@@ -228,7 +231,7 @@ const FooterSec = () => {
                   <p
                     style={{
                       fontSize: "17px",
-                      color: "#fff",
+                      color: "#003180",
                       marginBottom: "7px",
                     }}
                   >
@@ -239,7 +242,7 @@ const FooterSec = () => {
                   <p
                     style={{
                       fontSize: "17px",
-                      color: "#fff",
+                      color: "#003180",
                       marginBottom: "7px",
                     }}
                   >
@@ -250,7 +253,7 @@ const FooterSec = () => {
                   <p
                     style={{
                       fontSize: "17px",
-                      color: "#fff",
+                      color: "#003180",
                       marginBottom: "7px",
                     }}
                   >
@@ -265,7 +268,7 @@ const FooterSec = () => {
           <Row gutter={24}>
             <Col span={24}>
               <span>
-                <Divider style={{ borderColor: "#fff" }} />
+                <Divider style={{ borderColor: "#003180" }} />
               </span>
               <div
                 style={{
@@ -276,12 +279,18 @@ const FooterSec = () => {
                 }}
               >
                 <div>
-                  <p style={{ marginBottom: "0", fontSize: "16px" }}>
+                  <p
+                    style={{
+                      marginBottom: "0",
+                      fontSize: "16px",
+                      color: "#003180",
+                    }}
+                  >
                     Copyright © 2022 jumpsmash, All rights reserved. Powered by
                     MoxCreative.
                   </p>
                 </div>
-                <div style={{ display: "flex", gap: "15px" }}>
+                <div style={{ display: "flex", gap: "15px", color: "#003180" }}>
                   <p>Terms of use</p>
                   <p>Privacy Policy</p>
                   <p>Cookie Policy</p>

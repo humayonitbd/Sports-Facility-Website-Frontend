@@ -23,16 +23,20 @@ import moment from "moment";
 import dayjs from "dayjs";
 import availableTimeSlotsApi from "../../redux/features/availableTimeSlots/availableTimeSlotsApi";
 import { useState } from "react";
+import bookingApi from "../../redux/features/booking/bookingApi";
 
 const { Title,Text, Paragraph } = Typography;
-const { Item: FormItem } = Form;
 
 const FeaturedFacilityDetails = () => {
   const { id:facilityId } = useParams();
   const { data: singleFacility } =
     facilitiesApi.useSingleFacilityGetQuery(facilityId);
+    const [addBooking] = bookingApi.useAddBookingMutation();
   // console.log(singleFacility)
   const [currectDate, setCurrectDate] = useState('');
+  const newDate = new Date();
+  const formateNewDate = moment(newDate).format("YYYY-MM-DD");
+  // console.log("formatNewDate", formateNewDate);
   
   
   const { data: availableSlots } =
@@ -48,7 +52,7 @@ const FeaturedFacilityDetails = () => {
   };
 
   // console.log("availableTimeSlots", availableTimeSlots);
-  const onFinish: FormProps<any>["onFinish"] = (values) => {
+  const onFinish: FormProps<any>["onFinish"] = async(values) => {
     const startTime = values.startTime
       ? dayjs(values.startTime).format("HH:mm") 
       : null;
@@ -60,9 +64,15 @@ const FeaturedFacilityDetails = () => {
       startTime,
       endTime,
       facility: facilityId,
-      date: currectDate,
+      date: currectDate ? currectDate : formateNewDate,
     };
-
+   const res = await addBooking(bookingData).unwrap();
+   if (res.success) {
+     console.log(res);
+     window.location.href = res.data.payment_url;
+   } else {
+     console.error("Order creation failed:", res.message);
+   }
     console.log("bookingData", bookingData);
    
   };

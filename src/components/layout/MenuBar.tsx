@@ -27,7 +27,7 @@ const userRole = {
 };
 const MenuBar = () => {
   const screens = useBreakpoint();
-  const contentPadding = screens.md ? "50px 100px" : "0 0";
+  const contentPadding = screens.md ? "40px 100px" : "0 0";
   const token = useAppSelector(useCurrentToken);
    const dispatch = useDispatch();
   
