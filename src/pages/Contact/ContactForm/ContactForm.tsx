@@ -8,6 +8,7 @@ import { CSSProperties } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ContactZodSchema } from "../../../Schemas/contact.zod.schema";
 
+
 const ContactForm = () => {
   const onSubmit = async (data: FieldValues) => {
     console.log("data", data);
@@ -75,12 +76,22 @@ const ContactForm = () => {
   
 
   return (
-    <div style={{ background: "#2c79ff", padding: "50px 0" }}>
+    <div style={{ background: "#d1e3ff", padding: "50px 0" }}>
       <div style={formContainerStyle}>
         <CustomForm
           onSubmit={onSubmit}
           resolver={zodResolver(ContactZodSchema)}
         >
+          <h3
+            style={{
+              margin: "0 0 20px 0",
+              textAlign: "center",
+              fontSize: "25px",
+              color: "#2C79FF",
+            }}
+          >
+            Contact with our company
+          </h3>
           <CustomInput
             type="text"
             name="name"

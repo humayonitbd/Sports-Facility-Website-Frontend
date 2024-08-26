@@ -65,7 +65,7 @@ const HowItWorks = () => {
     <div
       style={{
         padding: "50px 0",
-        background: "linear-gradient(360deg, #d1e3ff 0%, #e8f1ff 100%)",
+        background: "linear-gradient(360deg, #e8f1ff 0%, #e8f1ff 100%)",
       }}
     >
       <Title

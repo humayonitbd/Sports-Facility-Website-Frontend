@@ -289,7 +289,7 @@ const HistoryMilestones = () => {
       <Row justify="center">
         <Col xs={24} sm={20} md={18} lg={16}>
           <Title level={2} style={titleStyle}>
-            Our Journey
+            Our Company Milestones
           </Title>
           <Timeline mode="alternate" style={timelineStyle}>
             {milestones.map((milestone, index) => (
