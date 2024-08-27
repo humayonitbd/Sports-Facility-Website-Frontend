@@ -1,23 +1,24 @@
-import Dashboard from "../pages/Dashboard/Admin/Dashboard/Dashboard";
+
+import FacilityBooking from "../pages/Dashboard/User/FacilityBooking/FacilityBooking";
+import UserDashboard from "../pages/Dashboard/User/UserDashboard/UserDashboard";
+import { MdSpaceDashboard } from "react-icons/md";
+import { GrCompliance } from "react-icons/gr";
 
 export const userdashboardPaths = [
   {
-    index: true, // Default path for the dashboard
-    element: <Dashboard />,
+    index: true,
+    element: <UserDashboard />,
   },
   {
     name: "Dashboard",
     path: "dashboard",
-    element: <Dashboard />,
+    element: <UserDashboard />,
+    icon: MdSpaceDashboard,
   },
   {
-    name: "User Management",
-    children: [
-      {
-        name: "Create Student",
-        path: "dashboard",
-        element: <Dashboard />,
-      },
-    ],
+    name: "Booking-Facility",
+    path: "booking-facility",
+    element: <FacilityBooking />,
+    icon: GrCompliance,
   },
 ];

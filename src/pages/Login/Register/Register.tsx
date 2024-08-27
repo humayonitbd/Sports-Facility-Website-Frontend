@@ -3,15 +3,12 @@ import CustomInput from "../../../components/Form/CustomInput";
 import CustomForm from "../../../components/Form/CustomForm";
 import { FieldValues } from "react-hook-form";
 import loginImage from "../../../assets/login images/logn image.jpg";
-import CustomSelect from "../../../components/Form/CustomSelect";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import authApi from "../../../redux/features/auth/authApi";
 import { registerZodSchema } from "../../../Schemas/register.zod.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-const userRole = ["User", "Admin"];
 
 // export const userRoleOptions = userRole.map((item) => ({
 //   value: item.toLowerCase(),

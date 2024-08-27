@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-
+import { IconType } from "react-icons";
 export type TRoute = {
   path: string;
   element: ReactNode;
@@ -12,9 +12,12 @@ export type TSidebarItem = {
       children?: TSidebarItem[];
     }| undefined;
 
+
 export type TUserPath = {
   name?: string;
   path?: string;
-  element?: ReactNode;
+  element?: React.ReactNode;
+  icon?: IconType; 
   children?: TUserPath[];
 };
+

@@ -5,14 +5,14 @@ export type TBooking = {
   date: string;
   startTime: string;
   endTime: string;
-  user: string;
+  user: TDBUser;
   facility: TFacility;
   payableAmount: number;
   isBooked: string;
   createdAt: string;
   updatedAt: string;
   __v: number;
-}
+};
 
 export type TFacility = {
   _id: string;
@@ -25,4 +25,17 @@ export type TFacility = {
   createdAt: string;
   updatedAt: string;
   __v: number;
+}
+
+export type TDBUser= {
+  _id: string
+  name: string
+  email: string
+  phone: string
+  role: string
+  address: string
+  profileImg: string
+  createdAt: string
+  updatedAt: string
+  __v: number
 }

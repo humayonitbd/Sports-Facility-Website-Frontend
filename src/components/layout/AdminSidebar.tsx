@@ -1,14 +1,13 @@
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Image } from "antd";
 import { admindashboardPaths } from "../../routes/admin.dashboard.routes";
-
-import { NavLink } from "react-router-dom";
-
 import { userdashboardPaths } from "../../routes/user.dashboard.routes";
 import { dbSideItemGenerator } from "../../utils/dbSideItemGenerator";
-import { FaUser} from "react-icons/fa";
+
 import { useAppSelector } from "../../redux/hooks";
 import { TUser, useCurrentToken } from "../../redux/features/auth/authSlice";
 import { verifyToken } from "../../utils/verifyToken";
+import authApi from "../../redux/features/auth/authApi";
+
 
 const userRole = {
   ADMIN: "admin",
@@ -16,6 +15,7 @@ const userRole = {
 };
 
 const { Sider } = Layout;
+
 const AdminSidebar = () => {
   //   const user = useAppSelector(selectCurrentUser);
   const token = useAppSelector(useCurrentToken);
@@ -26,7 +26,8 @@ const AdminSidebar = () => {
   }
 
   let sidebarItems;
-  
+  // console.log('admin path', user?.role)
+  const {data:userData} = authApi.useUserGetQuery(user?.userId);
 
   switch (user?.role) {
     case userRole.ADMIN:
@@ -56,31 +57,35 @@ const AdminSidebar = () => {
       <div
         style={{
           color: "white",
-          padding:"30px 0",
-          textAlign:'center'
-          }}
+          padding: "30px 0",
+          textAlign: "center",
+        }}
       >
-        <NavLink to="/dashboard">
-          <div style={{ }}>
-            <FaUser
+        <div style={{}}>
+          {userData?.data && (
+            <Image
+              src={userData?.data?.profileImg}
+              preview={false}
               style={{
-                fontSize: "80px",
+                width: "100%", // Adjust width to be responsive
+                height: "100px",
                 border: "2px solid white",
-                padding: "10px",
-                borderRadius: "100%",
-                color: "white",
+                padding: "5px",
+                borderRadius: "100%", // Maintain aspect ratio
               }}
             />
-          </div>
-        </NavLink>
-        <h2>Humayon Forid</h2>
+          )}
+        </div>
+
+        <h2 style={{ lineHeight: "20px" }}>{userData?.data?.name}</h2>
+        <p style={{ lineHeight: "1px" }}>{userData?.data?.email}</p>
       </div>
       <Menu
-        theme="dark"
         mode="inline"
         style={{ background: "rgb(0, 69, 179)" }}
         defaultSelectedKeys={["4"]}
         items={sidebarItems}
+        theme="dark"
       />
     </Sider>
   );

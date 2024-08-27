@@ -7,24 +7,33 @@ import Register from "../pages/Login/Register/Register";
 import App from "../App";
 import { navbarPaths } from "./main.routes";
 import ErrorPage from "../pages/SharedPage/ErrorPage/ErrorPage";
+import ProtectedRoute from "../components/layout/ProtectedRoute";
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement:<ErrorPage />,
+    errorElement: <ErrorPage />,
     children: routeGenerator(navbarPaths),
   },
 
   {
     path: "/user",
-    element: <AdminLayout />,
+    element: (
+      <ProtectedRoute role="user">
+        <AdminLayout />
+      </ProtectedRoute>
+    ),
     children: routeGenerator(userdashboardPaths),
   },
   {
     path: "/admin",
-    element: <AdminLayout />,
+    element: (
+      <ProtectedRoute role="admin">
+        <AdminLayout />
+      </ProtectedRoute>
+    ),
     children: routeGenerator(admindashboardPaths),
   },
   {

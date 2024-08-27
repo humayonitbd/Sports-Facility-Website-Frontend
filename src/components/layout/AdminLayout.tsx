@@ -19,7 +19,7 @@ const AdminLayout = () => {
       <Layout>
         <Header
           style={{
-            padding: "0 24px",
+            padding: "0px 24px",
             // background: "#fff",
             background: "rgb(0, 69, 179)",
             borderRadius: "5px",
@@ -50,8 +50,8 @@ const AdminLayout = () => {
             <form
               onSubmit={handleSubmit(onSubmit)}
               style={{
-                display: "flex", 
-                justifyContent: "center", 
+                display: "flex",
+                justifyContent: "center",
                 width: "100%",
                 maxWidth: "400px",
                 margin: "0 auto",
@@ -59,7 +59,9 @@ const AdminLayout = () => {
             >
               <input
                 style={{
-                  padding: "10px 15px",
+                  padding: "0px 5px",
+                  height: "40px",
+                  lineHeight: "30px",
                   width: "70%",
                   border: "2px solid #fff",
                   borderRadius: "8px 0 0 8px",
@@ -73,7 +75,8 @@ const AdminLayout = () => {
               />
               <button
                 style={{
-                  padding: "10px 5px",
+                  padding: "0 10px",
+                  height: "40px", 
                   width: "20%",
                   background: "rgb(0, 69, 179)",
                   color: "#fff",
@@ -81,7 +84,8 @@ const AdminLayout = () => {
                   borderRadius: "0 8px 8px 0",
                   cursor: "pointer",
                   fontSize: "16px",
-                  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+                  lineHeight: "40px",
+                  textAlign: "center", 
                   transition: "all 0.3s ease",
                 }}
                 type="submit"
@@ -94,17 +98,25 @@ const AdminLayout = () => {
           {/* Right Section: Notification Icon */}
           <div>
             <Space>
-              <BellOutlined style={{ fontSize: "20px", color: "#fff", border:'2px solid #fff', borderRadius:'100%', padding:'5px' }} />
+              <BellOutlined
+                style={{
+                  fontSize: "20px",
+                  color: "#fff",
+                  border: "2px solid #fff",
+                  borderRadius: "100%",
+                  padding: "5px",
+                }}
+              />
             </Space>
           </div>
         </Header>
 
-        <Content style={{ margin: "24px 16px 0", overflow: "initial" }}>
+        <Content style={{ overflow: "initial" }}>
           <div
             style={{
-              padding: 24,
+              margin: 5,
               background: "#fff",
-              minHeight: 360,
+              minHeight: 630,
               borderRadius: "8px",
               boxShadow: "0 2px 8px #f0f1f2",
             }}
