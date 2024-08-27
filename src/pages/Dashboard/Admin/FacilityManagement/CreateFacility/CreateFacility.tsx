@@ -4,26 +4,18 @@ import { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import Swal from "sweetalert2";
 import { zodResolver } from "@hookform/resolvers/zod";
-import authApi from "../../../../../redux/features/auth/authApi";
 import CustomForm from "../../../../../components/Form/CustomForm";
 import CustomInput from "../../../../../components/Form/CustomInput";
-import { registerZodSchema } from "../../../../../Schemas/register.zod.schema";
+import facilitiesApi from "../../../../../redux/features/facility/facilityApi";
+import { facilityZodSchema } from "../../../../../Schemas/addFacility.zod.schema";
 
 const CreateFacility = () => {
-  const [registerLoading, setRegisterLoading] = useState(false);
+  const [facilityLoading, setFacilityLoading] = useState(false);
   const navigate = useNavigate();
-  const [adminCreateHandler] = authApi.useRegisterMutation();
+  const [CreateFacilityHandler] = facilitiesApi.useAddFacilityMutation();
 
   const onSubmit = async (data: FieldValues) => {
-    if (data.password.length < 6) {
-      Swal.fire({
-        icon: "error",
-        title: "Your password must be at least 6 characters!",
-        showConfirmButton: false,
-        timer: 1000,
-      });
-      return;
-    }
+    
 
     if (!data.image) {
       Swal.fire({
@@ -34,7 +26,7 @@ const CreateFacility = () => {
       });
       return;
     }
-    setRegisterLoading(true);
+    setFacilityLoading(true);
 
     const formData = new FormData();
     formData.append("image", data.image);
@@ -52,32 +44,30 @@ const CreateFacility = () => {
       const result = await response.json();
 
       if (result.success) {
-        const userInfo = {
+        const facilityInfo = {
           name: data.name,
-          email: data.email,
-          password: data.password,
-          phone: data.phone,
-          address: data.address,
-          profileImg: result.data.display_url,
-          role: "admin",
+          description: data.description,
+          pricePerHour: Number(data.pricePerHour),
+          location: data.location,
+          image: result.data.display_url,
         };
 
-        console.log("Register userData", userInfo);
+        console.log("facilityInfo Data", facilityInfo);
 
         //  Add your API call here to save the user data
-        const res: any = await adminCreateHandler(userInfo);
+        const res: any = await CreateFacilityHandler(facilityInfo);
         // console.log("register res", res);
         if (res?.data?.success) {
-          setRegisterLoading(false);
+          setFacilityLoading(false);
           Swal.fire({
             icon: "success",
-            title: `Admin Create Successfull !!`,
+            title: `${res.data.message}`,
             showConfirmButton: false,
             timer: 1000,
           });
           navigate("/admin/facilities");
         } else {
-          setRegisterLoading(false);
+          setFacilityLoading(false);
           Swal.fire({
             icon: "error",
             title: `${res?.error?.data?.message}`,
@@ -86,7 +76,7 @@ const CreateFacility = () => {
           });
         }
       } else {
-        setRegisterLoading(false);
+        setFacilityLoading(false);
         Swal.fire({
           icon: "error",
           title: "Image upload failed!",
@@ -96,7 +86,7 @@ const CreateFacility = () => {
       }
     } catch (error) {
       console.error("Error uploading image:", error);
-      setRegisterLoading(false);
+      setFacilityLoading(false);
       Swal.fire({
         icon: "error",
         title: "An error occurred!",
@@ -138,53 +128,44 @@ const CreateFacility = () => {
                 margin: "16px 0",
               }}
             >
-              Create Admin Here!
+              Create Facility !
             </h2>
             <CustomForm
               onSubmit={onSubmit}
-              resolver={zodResolver(registerZodSchema)}
+              resolver={zodResolver(facilityZodSchema)}
             >
               <CustomInput
                 type="text"
                 name="name"
-                label="Full Name: "
+                label="Facility Name: "
                 labelColor="white"
               />
               <CustomInput
                 type="text"
-                name="email"
-                label="Email: "
+                name="description"
+                label="Description: "
                 labelColor="white"
               />
               <CustomInput
-                type="password"
-                name="password"
-                label="Password: "
-                labelColor="white"
-              />
-              <CustomInput
-                type="text"
-                name="phone"
-                label="Phone Number: "
+                type="number"
+                name="pricePerHour"
+                label="Price Per Hour: "
                 labelColor="white"
               />
               <CustomInput
                 type="text"
-                name="address"
-                label="Address: "
+                name="location"
+                label="Location: "
                 labelColor="white"
               />
               <CustomInput
                 type="file"
                 name="image"
-                label="Profile Image: "
+                label="Facility Image: "
                 labelColor="white"
               />
               <div style={{ textAlign: "center", marginBottom: "10px" }}>
-                <Button htmlType="submit">
-                  {registerLoading ? (
-                    <span className="loading loading-spinner mr-2"></span>
-                  ) : null}
+                <Button htmlType="submit" loading={facilityLoading}>
                   Submit
                 </Button>
               </div>

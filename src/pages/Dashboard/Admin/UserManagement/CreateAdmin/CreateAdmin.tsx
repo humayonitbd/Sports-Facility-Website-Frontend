@@ -10,7 +10,7 @@ import CustomInput from "../../../../../components/Form/CustomInput";
 import { registerZodSchema } from "../../../../../Schemas/register.zod.schema";
 
 const CreateAdmin = () => {
-    const [registerLoading, setRegisterLoading] = useState(false);
+    const [createAdminLoading, setCreateAdminLoading] = useState(false);
     const navigate = useNavigate();
     const [adminCreateHandler] = authApi.useRegisterMutation();
 
@@ -35,7 +35,7 @@ const CreateAdmin = () => {
         });
         return;
       }
-      setRegisterLoading(true);
+      setCreateAdminLoading(true);
 
       const formData = new FormData();
       formData.append("image", data.image);
@@ -69,7 +69,7 @@ const CreateAdmin = () => {
           const res: any = await adminCreateHandler(userInfo);
           // console.log("register res", res);
           if (res?.data?.success) {
-            setRegisterLoading(false);
+            setCreateAdminLoading(false);
             Swal.fire({
               icon: "success",
               title: `Admin Create Successfull !!`,
@@ -78,7 +78,7 @@ const CreateAdmin = () => {
             });
             navigate("/admin/all-users");
           } else {
-            setRegisterLoading(false);
+            setCreateAdminLoading(false);
             Swal.fire({
               icon: "error",
               title: `${res?.error?.data?.message}`,
@@ -87,7 +87,7 @@ const CreateAdmin = () => {
             });
           }
         } else {
-          setRegisterLoading(false);
+          setCreateAdminLoading(false);
           Swal.fire({
             icon: "error",
             title: "Image upload failed!",
@@ -97,7 +97,7 @@ const CreateAdmin = () => {
         }
       } catch (error) {
         console.error("Error uploading image:", error);
-        setRegisterLoading(false);
+        setCreateAdminLoading(false);
         Swal.fire({
           icon: "error",
           title: "An error occurred!",
@@ -182,11 +182,8 @@ const CreateAdmin = () => {
                 label="Profile Image: "
                 labelColor="white"
               />
-              <div style={{ textAlign: "center" , marginBottom:'10px'}}>
-                <Button htmlType="submit">
-                  {registerLoading ? (
-                    <span className="loading loading-spinner mr-2"></span>
-                  ) : null}
+              <div style={{ textAlign: "center", marginBottom: "10px" }}>
+                <Button htmlType="submit" loading={createAdminLoading}>
                   Submit
                 </Button>
               </div>

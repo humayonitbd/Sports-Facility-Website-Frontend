@@ -170,17 +170,44 @@ const Register = () => {
               onSubmit={onSubmit}
               resolver={zodResolver(registerZodSchema)}
             >
-              <CustomInput type="text" name="name" label="Full Name: " labelColor="white" />
-              <CustomInput type="text" name="email" label="Email: " labelColor="white" />
-              <CustomInput type="password" name="password" label="Password: " labelColor="white" />
-              <CustomInput type="text" name="phone" label="Phone Number: " labelColor="white" />
-              <CustomInput type="text" name="address" label="Address: " labelColor="white" />
-              <CustomInput type="file" name="image" label="Profile Image: " labelColor="white" />
+              <CustomInput
+                type="text"
+                name="name"
+                label="Full Name: "
+                labelColor="white"
+              />
+              <CustomInput
+                type="text"
+                name="email"
+                label="Email: "
+                labelColor="white"
+              />
+              <CustomInput
+                type="password"
+                name="password"
+                label="Password: "
+                labelColor="white"
+              />
+              <CustomInput
+                type="text"
+                name="phone"
+                label="Phone Number: "
+                labelColor="white"
+              />
+              <CustomInput
+                type="text"
+                name="address"
+                label="Address: "
+                labelColor="white"
+              />
+              <CustomInput
+                type="file"
+                name="image"
+                label="Profile Image: "
+                labelColor="white"
+              />
               <div style={{ textAlign: "center" }}>
-                <Button htmlType="submit">
-                  {registerLoading ? (
-                    <span className="loading loading-spinner mr-2"></span>
-                  ) : null}
+                <Button htmlType="submit" loading={registerLoading}>
                   Submit
                 </Button>
               </div>

@@ -11,8 +11,10 @@ import { setUser } from "../../../redux/features/auth/authSlice";
 import { verifyToken } from "../../../utils/verifyToken";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginZodSchema } from "../../../Schemas/login.zod.schema";
+import {useState} from "react"
 
 const Login = () => {
+  const [loginLoading, setLoginLoading] = useState(false);
   const defaultValues = {
     email: "user@gmail.com",
     password: "123456",
@@ -25,7 +27,7 @@ const navigate = useNavigate();
 
   const onSubmit = async (data: FieldValues) => {
     console.log("data", data);
-
+      setLoginLoading(true);
         try {
         
           const loginData = {
@@ -38,6 +40,7 @@ const navigate = useNavigate();
           const user = verifyToken(jwtToken);
           dispatch(setUser({ user: user, token: res?.token }));
           if (res?.success) {
+            setLoginLoading(false);
             Swal.fire({
               icon: "success",
               title: `${res.message}`,
@@ -48,6 +51,7 @@ const navigate = useNavigate();
             navigate(from, { replace: true });
           }
         } catch (error: any) {
+          setLoginLoading(false);
           if (error?.data.success === false) {
             Swal.fire({
               icon: "error",
@@ -119,10 +123,22 @@ const navigate = useNavigate();
               resolver={zodResolver(loginZodSchema)}
               defaultValues={defaultValues}
             >
-              <CustomInput type="text" name="email" label="Email: " labelColor="white" />
-              <CustomInput type="password" name="password" label="Password: " labelColor="white" />
+              <CustomInput
+                type="text"
+                name="email"
+                label="Email: "
+                labelColor="white"
+              />
+              <CustomInput
+                type="password"
+                name="password"
+                label="Password: "
+                labelColor="white"
+              />
               <div style={{ textAlign: "center" }}>
-                <Button htmlType="submit">Login</Button>
+                <Button htmlType="submit" loading={loginLoading}>
+                  Login
+                </Button>
               </div>
               <div style={{ textAlign: "center" }}>
                 <p style={{ color: "#fff", marginTop: "14px" }}>
