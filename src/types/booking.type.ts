@@ -27,15 +27,16 @@ export type TFacility = {
   __v: number;
 }
 
-export type TDBUser= {
-  _id: string
-  name: string
-  email: string
-  phone: string
-  role: string
-  address: string
-  profileImg: string
-  createdAt: string
-  updatedAt: string
-  __v: number
-}
+export type TDBUser = {
+  _id: string;
+  name: string;
+  email: string;
+  phone: string;
+  status:string;
+  role: string;
+  address: string;
+  profileImg: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};

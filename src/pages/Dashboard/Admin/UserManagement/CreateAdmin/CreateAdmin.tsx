@@ -1,5 +1,5 @@
 import { Button, Row, Col } from "antd";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import Swal from "sweetalert2";
@@ -15,96 +15,96 @@ const CreateAdmin = () => {
     const [adminCreateHandler] = authApi.useRegisterMutation();
 
     const onSubmit = async (data: FieldValues) => {
-        console.log(data)
-    //   if (data.password.length < 6) {
-    //     Swal.fire({
-    //       icon: "error",
-    //       title: "Your password must be at least 6 characters!",
-    //       showConfirmButton: false,
-    //       timer: 1000,
-    //     });
-    //     return;
-    //   }
+     
+      if (data.password.length < 6) {
+        Swal.fire({
+          icon: "error",
+          title: "Your password must be at least 6 characters!",
+          showConfirmButton: false,
+          timer: 1000,
+        });
+        return;
+      }
 
-    //   if (!data.image) {
-    //     Swal.fire({
-    //       icon: "error",
-    //       title: "Please provide your profile image!",
-    //       showConfirmButton: false,
-    //       timer: 1000,
-    //     });
-    //     return;
-    //   }
-    //   setRegisterLoading(true);
+      if (!data.image) {
+        Swal.fire({
+          icon: "error",
+          title: "Please provide your profile image!",
+          showConfirmButton: false,
+          timer: 1000,
+        });
+        return;
+      }
+      setRegisterLoading(true);
 
-    //   const formData = new FormData();
-    //   formData.append("image", data.image);
+      const formData = new FormData();
+      formData.append("image", data.image);
 
-    //   try {
-    //     const response = await fetch(
-    //       `https://api.imgbb.com/1/upload?key=${
-    //         import.meta.env.VITE_APP_IMAGE_URL_KEY
-    //       }`,
-    //       {
-    //         method: "POST",
-    //         body: formData,
-    //       }
-    //     );
-    //     const result = await response.json();
+      try {
+        const response = await fetch(
+          `https://api.imgbb.com/1/upload?key=${
+            import.meta.env.VITE_APP_IMAGE_URL_KEY
+          }`,
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+        const result = await response.json();
 
-    //     if (result.success) {
-    //       const userInfo = {
-    //         name: data.name,
-    //         email: data.email,
-    //         password: data.password,
-    //         phone: data.phone,
-    //         address: data.address,
-    //         profileImg: result.data.display_url,
-    //         role:'admin'
-    //       };
+        if (result.success) {
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+            password: data.password,
+            phone: data.phone,
+            address: data.address,
+            profileImg: result.data.display_url,
+            role:'admin'
+          };
 
-    //       console.log("Register userData", userInfo);
+          console.log("Register userData", userInfo);
 
-    //       //  Add your API call here to save the user data
-    //       const res: any = await registerHandler(userInfo);
-    //       // console.log("register res", res);
-    //       if (res?.data?.success) {
-    //         setRegisterLoading(false);
-    //         Swal.fire({
-    //           icon: "success",
-    //           title: `Admin Create Successfull !!`,
-    //           showConfirmButton: false,
-    //           timer: 1000,
-    //         });
-
-    //       } else {
-    //         setRegisterLoading(false);
-    //         Swal.fire({
-    //           icon: "error",
-    //           title: `${res?.error?.data?.message}`,
-    //           showConfirmButton: false,
-    //           timer: 1200,
-    //         });
-    //       }
-    //     } else {
-    //       setRegisterLoading(false);
-    //       Swal.fire({
-    //         icon: "error",
-    //         title: "Image upload failed!",
-    //         showConfirmButton: false,
-    //         timer: 1000,
-    //       });
-    //     }
-    //   } catch (error) {
-    //     console.error("Error uploading image:", error);
-    //     setRegisterLoading(false);
-    //     Swal.fire({
-    //       icon: "error",
-    //       title: "An error occurred!",
-    //       showConfirmButton: false,
-    //       timer: 1000,
-    //     });
-    //   }
+          //  Add your API call here to save the user data
+          const res: any = await adminCreateHandler(userInfo);
+          // console.log("register res", res);
+          if (res?.data?.success) {
+            setRegisterLoading(false);
+            Swal.fire({
+              icon: "success",
+              title: `Admin Create Successfull !!`,
+              showConfirmButton: false,
+              timer: 1000,
+            });
+            navigate("/admin/all-users");
+          } else {
+            setRegisterLoading(false);
+            Swal.fire({
+              icon: "error",
+              title: `${res?.error?.data?.message}`,
+              showConfirmButton: false,
+              timer: 1200,
+            });
+          }
+        } else {
+          setRegisterLoading(false);
+          Swal.fire({
+            icon: "error",
+            title: "Image upload failed!",
+            showConfirmButton: false,
+            timer: 1000,
+          });
+        }
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        setRegisterLoading(false);
+        Swal.fire({
+          icon: "error",
+          title: "An error occurred!",
+          showConfirmButton: false,
+          timer: 1000,
+        });
+      }
     };
   
 
@@ -137,7 +137,7 @@ const CreateAdmin = () => {
               style={{
                 textAlign: "center",
                 color: "#fff",
-                marginBottom: "16px",
+                margin: "16px 0",
               }}
             >
               Create Admin Here!
@@ -146,34 +146,49 @@ const CreateAdmin = () => {
               onSubmit={onSubmit}
               resolver={zodResolver(registerZodSchema)}
             >
-              <CustomInput type="text" name="name" label="Full Name: " />
-              <CustomInput type="text" name="email" label="Email: " />
-              <CustomInput type="password" name="password" label="Password: " />
-              <CustomInput type="text" name="phone" label="Phone Number: " />
-              <CustomInput type="text" name="address" label="Address: " />
-              <CustomInput type="file" name="image" label="Profile Image: " />
-              <div style={{ textAlign: "center" }}>
+              <CustomInput
+                type="text"
+                name="name"
+                label="Full Name: "
+                labelColor="white"
+              />
+              <CustomInput
+                type="text"
+                name="email"
+                label="Email: "
+                labelColor="white"
+              />
+              <CustomInput
+                type="password"
+                name="password"
+                label="Password: "
+                labelColor="white"
+              />
+              <CustomInput
+                type="text"
+                name="phone"
+                label="Phone Number: "
+                labelColor="white"
+              />
+              <CustomInput
+                type="text"
+                name="address"
+                label="Address: "
+                labelColor="white"
+              />
+              <CustomInput
+                type="file"
+                name="image"
+                label="Profile Image: "
+                labelColor="white"
+              />
+              <div style={{ textAlign: "center" , marginBottom:'10px'}}>
                 <Button htmlType="submit">
                   {registerLoading ? (
                     <span className="loading loading-spinner mr-2"></span>
                   ) : null}
                   Submit
                 </Button>
-              </div>
-              <div style={{ textAlign: "center" }}>
-                <p style={{ color: "#fff", marginTop: "14px" }}>
-                  You have an account?{" "}
-                  <NavLink
-                    style={{
-                      color: "#fff",
-                      fontWeight: "bold",
-                      textDecoration: "underline",
-                    }}
-                    to="/login"
-                  >
-                    Login
-                  </NavLink>
-                </p>
               </div>
             </CustomForm>
           </div>

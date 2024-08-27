@@ -5,16 +5,25 @@ type TInputProps = {
   type?: string;
   name: string;
   label?: string;
-  style?: React.CSSProperties; 
+  style?: React.CSSProperties;
+  labelColor?: string;
 };
 
-const CustomInput = ({ type = "text", name, label, style }: TInputProps) => {
+const CustomInput = ({
+  type = "text",
+  name,
+  label,
+  style,
+  labelColor = "inherit",
+}: TInputProps) => {
   return (
     <div style={{ marginBottom: "10px" }}>
       <Controller
         name={name}
         render={({ field, fieldState: { error } }) => (
-          <Form.Item label={label}>
+          <Form.Item
+           label={<span style={{ color: labelColor }}>{label}</span>}
+           >
             <Input
               {...field}
               type={type}

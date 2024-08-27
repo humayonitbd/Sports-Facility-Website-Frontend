@@ -119,8 +119,8 @@ const navigate = useNavigate();
               resolver={zodResolver(loginZodSchema)}
               defaultValues={defaultValues}
             >
-              <CustomInput type="text" name="email" label="Email: " />
-              <CustomInput type="password" name="password" label="Password: " />
+              <CustomInput type="text" name="email" label="Email: " labelColor="white" />
+              <CustomInput type="password" name="password" label="Password: " labelColor="white" />
               <div style={{ textAlign: "center" }}>
                 <Button htmlType="submit">Login</Button>
               </div>
