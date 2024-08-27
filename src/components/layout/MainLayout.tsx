@@ -14,7 +14,7 @@ const MainLayout = () => {
       <div>
         <Layout>
           <MenuBar />
-          <Content style={{ padding: contentPadding, background: "#fff" }}>
+          <Content style={{  background: "#fff" }}>
             {/* <Breadcrumb style={{ margin: "16px 0" }}>
               <Breadcrumb.Item>Home</Breadcrumb.Item>
               <Breadcrumb.Item>List</Breadcrumb.Item>

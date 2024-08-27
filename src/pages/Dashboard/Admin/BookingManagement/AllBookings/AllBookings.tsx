@@ -3,6 +3,7 @@ import {  Space, Table, TableColumnsType, TableProps } from "antd";
 import bookingApi from "../../../../../redux/features/booking/bookingApi";
 import { TBooking } from "../../../../../types/booking.type";
 import CustomModal from "../../../../../components/ui/CustomModal";
+import SmallLoading from "../../../../../components/ui/SmallLoading";
 
 export type TTableData = Pick<
   TBooking,
@@ -14,10 +15,12 @@ export type TTableData = Pick<
   | "isBooked"
   | "paymentStatus"
   | "user"
-> & {
-  status: string;
-  userId: string;
-};
+  | "status"
+  | "__v"
+  | "facility"
+  | "createdAt"
+  | "updatedAt"
+>
 
 const AllBookings = () => {
   const {
@@ -25,12 +28,12 @@ const AllBookings = () => {
     isLoading,
     isFetching,
   } = bookingApi.useGetAllBookingFacilitiesQuery(null);
-  console.log("facilities booking data", bookingfacilities?.data);
+  // console.log("facilities booking data", bookingfacilities?.data);
  
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+ if (isLoading) {
+   return <SmallLoading />;
+ }
 
   const tableData = bookingfacilities?.data?.map(
     ({
@@ -42,6 +45,7 @@ const AllBookings = () => {
       isBooked,
       paymentStatus,
       user,
+     
     }) => ({
       key: _id,
       _id,

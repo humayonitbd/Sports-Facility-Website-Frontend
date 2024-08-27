@@ -24,6 +24,7 @@ import { useState } from "react";
 import bookingApi from "../../redux/features/booking/bookingApi";
 import { useAppSelector } from "../../redux/hooks";
 import Swal from "sweetalert2";
+import SmallLoading from "../../components/ui/SmallLoading";
 
 
 const { Title,Text, Paragraph } = Typography;
@@ -33,7 +34,7 @@ const FeaturedFacilityDetails = () => {
   const user = useAppSelector((state)=>state.auth.user);
   console.log('user login data', user);
   const navigate = useNavigate();
-  const { data: singleFacility } =
+  const { data: singleFacility , isLoading} =
     facilitiesApi.useSingleFacilityGetQuery(facilityId);
     const [addBooking] = bookingApi.useAddBookingMutation();
   // console.log(singleFacility)
@@ -97,6 +98,9 @@ const FeaturedFacilityDetails = () => {
    
   };
   
+  if (isLoading) {
+    return <SmallLoading />;
+  }
 
   return (
     <Row gutter={[32, 32]} style={{ padding: "50px" }}>

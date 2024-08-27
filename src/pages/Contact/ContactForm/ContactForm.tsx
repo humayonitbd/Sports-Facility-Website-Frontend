@@ -76,7 +76,7 @@ const ContactForm = () => {
   
 
   return (
-    <div style={{ background: "#d1e3ff", padding: "50px 0" }}>
+    <div style={{ background: "#d1e3ff", padding: "50px 10px" }}>
       <div style={formContainerStyle}>
         <CustomForm
           onSubmit={onSubmit}

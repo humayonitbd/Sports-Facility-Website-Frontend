@@ -1,5 +1,5 @@
 import { Button, Row, Col } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import Swal from "sweetalert2";
@@ -8,15 +8,17 @@ import CustomForm from "../../../../../components/Form/CustomForm";
 import CustomInput from "../../../../../components/Form/CustomInput";
 import facilitiesApi from "../../../../../redux/features/facility/facilityApi";
 import { facilityZodSchema } from "../../../../../Schemas/addFacility.zod.schema";
+import SmallLoading from "../../../../../components/ui/SmallLoading";
 
-const CreateFacility = () => {
+const FacilityUpdate = () => {
+    const {id} = useParams();
+    const {data:singleFacultyData, isLoading}= facilitiesApi.useSingleFacilityGetQuery(id);
+    console.log("singleFacultyData", singleFacultyData?.data);
   const [facilityLoading, setFacilityLoading] = useState(false);
   const navigate = useNavigate();
   const [CreateFacilityHandler] = facilitiesApi.useAddFacilityMutation();
 
   const onSubmit = async (data: FieldValues) => {
-    
-
     if (!data.image) {
       Swal.fire({
         icon: "error",
@@ -95,7 +97,9 @@ const CreateFacility = () => {
       });
     }
   };
-
+if (isLoading) {
+  return <SmallLoading />;
+}
   return (
     <div
       style={{
@@ -128,7 +132,7 @@ const CreateFacility = () => {
                 margin: "16px 0",
               }}
             >
-              Create Facility Data!
+              Update Facility Data!
             </h2>
             <CustomForm
               onSubmit={onSubmit}
@@ -177,4 +181,4 @@ const CreateFacility = () => {
   );
 };
 
-export default CreateFacility;
+export default FacilityUpdate;

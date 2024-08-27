@@ -2,13 +2,18 @@ import FacilityCard from "../../components/ui/FacilityCard";
 import SearchFilters from "../../components/ui/SearchFilters";
 import facilitiesApi from "../../redux/features/facility/facilityApi";
 import { useState, useEffect, useCallback } from "react";
-import {Row, Col} from "antd";
+import {Row, Col, Grid} from "antd";
 import { TFacilities } from "../../types/facilities.type";
 import { debounce } from "lodash";
+import SmallLoading from "../../components/ui/SmallLoading";
+
+const { useBreakpoint } = Grid;
 const Facilities = () => {
+   const screens = useBreakpoint();
     const [facilities, setFacilities] = useState<TFacilities[]>([]);
   const [filteredFacilities, setFilteredFacilities] = useState<TFacilities[]>([]);
-  const { data: facilitiess } = facilitiesApi.useGetAllFacilitiesQuery(null);
+  const { data: facilitiess, isLoading } =
+    facilitiesApi.useGetAllFacilitiesQuery(null);
 
     useEffect(() => {
       if (facilitiess?.data) {
@@ -42,8 +47,18 @@ const Facilities = () => {
     );
     setFilteredFacilities(results);
   };
+
+  if (isLoading) {
+    return <SmallLoading />;
+  }
+
     return (
-      <Row style={{ padding: "50px 0" }}>
+      <Row
+        style={{
+          padding: screens.md ? "50px 100px" : "40px",
+          background: "#F2F7FF",
+        }}
+      >
         <Col xs={24} sm={24} md={6}>
           <SearchFilters onSearch={debouncedSearch} onFilter={handleFilter} />
         </Col>

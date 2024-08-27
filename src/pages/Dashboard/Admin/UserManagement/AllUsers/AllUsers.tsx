@@ -2,6 +2,7 @@ import { Button, Space, Table, TableColumnsType, TableProps } from "antd";
 import bookingApi from "../../../../../redux/features/booking/bookingApi";
 import { TDBUser } from "../../../../../types/booking.type";
 import authApi from "../../../../../redux/features/auth/authApi";
+import SmallLoading from "../../../../../components/ui/SmallLoading";
 
 
 export type TTableData = Pick<
@@ -25,7 +26,7 @@ const AllUsers = () => {
 //   console.log("facilities booking data", AllUsers?.data);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <SmallLoading />;
   }
 
   const tableData = AllUsers?.data?.map(

@@ -1,14 +1,25 @@
 import { NavLink } from "react-router-dom";
 import facilitiesApi from "../../redux/features/facility/facilityApi";
-import { Card, Row, Col, Image, Typography } from "antd";
+import { Card, Row, Col, Image, Typography,Grid } from "antd";
+import SmallLoading from "../../components/ui/SmallLoading";
 
 const { Meta } = Card;
 const { Title } = Typography;
-
+const { useBreakpoint } = Grid;
 const FeaturedFacilities = () => {
-    const {data:facilities} = facilitiesApi.useGetAllFacilitiesQuery(null);
+  const screens = useBreakpoint();
+    const {data:facilities, isLoading} = facilitiesApi.useGetAllFacilitiesQuery(null);
+    if (isLoading) {
+      return <SmallLoading />;
+    }
     return (
-      <div style={{ padding: "50px", backgroundColor: "#f2f7ff" , borderBottom:'5px solid #fff'}}>
+      <div
+        style={{
+          padding: screens.md ? "60px 100px" : "40px",
+          backgroundColor: "#f2f7ff",
+          borderBottom: "5px solid #fff",
+        }}
+      >
         <Title
           level={2}
           style={{
@@ -44,7 +55,7 @@ const FeaturedFacilities = () => {
                     title={
                       <span style={{ color: "#0566FF" }}>{facility.name}</span>
                     }
-                    description={facility.description}
+                    description={facility.description.slice(0, 80)}
                     style={{ textAlign: "center" }}
                   />
                 </Card>

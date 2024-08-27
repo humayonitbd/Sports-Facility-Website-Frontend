@@ -6,6 +6,7 @@ import { TBooking } from "../../../../types/booking.type";
 import { DeleteOutlined } from "@ant-design/icons";
 import CustomModal from "../../../../components/ui/CustomModal";
 import Swal from "sweetalert2";
+import SmallLoading from "../../../../components/ui/SmallLoading";
 
 
 export type TTableData = Pick<
@@ -29,9 +30,9 @@ const FacilityBooking = () => {
     console.log("facilities booking data", bookingfacilities?.data);
     const [deleteBooking] = bookingApi.useDeleteBookingMutation();
     
-    if (isLoading) {
-      return <div>Loading...</div>;
-    }
+   if (isLoading) {
+     return <SmallLoading />;
+   }
 
     const handleCancelBooking = async (bookingId: string) => {
       try {

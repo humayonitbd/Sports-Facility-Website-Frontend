@@ -1,10 +1,13 @@
-import React from "react";
-import { Button, Typography, Space, Image } from "antd";
+
+import { Button, Typography, Image, Grid } from "antd";
 import heroImg from "../../../assets//HeroSection image/hero_image-2.png";
 
 const { Title, Paragraph } = Typography;
+const { useBreakpoint } = Grid;
 
 const HeroSection = () => {
+    const screens = useBreakpoint();
+    const contentPadding = screens.md ? "0 100px" : "0 0";
   return (
     <div
       style={{
@@ -12,7 +15,7 @@ const HeroSection = () => {
         alignItems: "center",
         justifyContent: "space-between",
         height: "90vh",
-        padding: "2rem",
+        padding: contentPadding ,
         backgroundColor: "rgb(229, 239, 255)",
 
         // overflow: "hidden",
@@ -68,7 +71,7 @@ const HeroSection = () => {
             e.currentTarget.style.borderColor = "#0566FF";
           }}
         >
-         Book Now
+          Book Now
         </Button>
       </div>
       <div

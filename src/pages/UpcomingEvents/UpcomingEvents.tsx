@@ -1,4 +1,4 @@
-import { Card, Typography, Button, Row, Col } from "antd";
+import { Card, Typography, Button, Row, Col, Grid } from "antd";
 import { CalendarOutlined } from "@ant-design/icons";
 import { GrLocation } from "react-icons/gr";
 
@@ -30,13 +30,15 @@ const events = [
 ];
 
 const { Title, Paragraph } = Typography;
+const { useBreakpoint } = Grid;
 
 const UpcomingEvents = () => {
+  const screens = useBreakpoint();
   return (
     <div
       className="upcoming-events-container"
       style={{
-        padding: "60px 20px",
+        padding: screens.md ? "60px 100px" : "40px",
         backgroundColor: "#f2f7ff",
         marginBottom: "5px",
       }}

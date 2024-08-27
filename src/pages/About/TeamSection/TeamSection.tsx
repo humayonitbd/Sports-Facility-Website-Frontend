@@ -1,5 +1,5 @@
 
-import { Card, Row, Col, Typography, Avatar } from "antd";
+import { Card, Row, Col, Typography, Avatar, Grid } from "antd";
 
 import member1 from '../../../assets/Team-member/professional photo.png';
 import member2 from '../../../assets/Team-member/Test_Image_1-removebg-preview.png';
@@ -7,9 +7,9 @@ import member3 from '../../../assets/testimonials image/08586a25-5872-4b47-97b4-
 // import member2 from '../../../assets/testimonials image/c4a992b3-d10c-44b4-90dc-6bf5500d6e09.jpg'
 
 const { Title, Paragraph } = Typography;
-
+const { useBreakpoint } = Grid;
 const TeamSection = () => {
-
+ const screens = useBreakpoint();
     const teamMembers = [
       {
         name: "Humayon Forid",
@@ -32,7 +32,7 @@ const TeamSection = () => {
       // Add more team members here
     ];
     return (
-      <div style={{ padding: "50px 5px", background: "#f2f7ff" }}>
+      <div style={{  padding: screens.md ? "60px 100px" : "40px", background: "#f2f7ff" }}>
         <Title
           level={2}
           style={{
