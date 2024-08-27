@@ -112,6 +112,7 @@ const AllBookings = () => {
         onChange={onChange}
         showSorterTooltip={{ target: "sorter-icon" }}
         pagination={false}
+        style={{ background: "#f2f7ff" }}
       />
       {/* <Pagination
           pageSize={totalData?.limit}

@@ -39,7 +39,7 @@ const AdminDashboard = () => {
   ];
 
   return (
-    <div style={{ padding: "24px" }}>
+    <div style={{ padding: "24px", background: "#f2f7ff" }}>
       <Title level={3} style={{ marginBottom: "24px" }}>
         Dashboard Overview
       </Title>
@@ -49,6 +49,7 @@ const AdminDashboard = () => {
           marginBottom: "24px",
           boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
           borderRadius: "10px",
+          background: "#fff",
         }}
       >
         <Col

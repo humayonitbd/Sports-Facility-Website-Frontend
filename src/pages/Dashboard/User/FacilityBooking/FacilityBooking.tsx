@@ -130,8 +130,6 @@ const FacilityBooking = () => {
                 >
                   Cancel
                 </Button>
-
-                {/* <Modal id={record.userId} /> */}
               </Space>
             );
           },
