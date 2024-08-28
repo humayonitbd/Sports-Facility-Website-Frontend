@@ -3,16 +3,46 @@ import { Card, Row, Col, Image, Button, Popconfirm } from "antd";
 import facilitiesApi from "../../../../../redux/features/facility/facilityApi";
 import { EditOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
 import SmallLoading from "../../../../../components/ui/SmallLoading";
+import Swal from "sweetalert2";
 
 const { Meta } = Card;
 
 const Facility = () => {
   const { data: facilities, isLoading } = facilitiesApi.useGetAllFacilitiesQuery(null);
+  const [deleteFacilityHandler] = facilitiesApi.useDeleteSingleFacilityMutation();
 
-  const handleFacilityDelete=async(facilityId:string)=>{
-    console.log("facility id ", facilityId);
+  const handleFacilityDelete = async (bookingId: string) => {
+    try {
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      });
 
-  }
+      if (result.isConfirmed) {
+        const res = await deleteFacilityHandler(bookingId).unwrap();
+        // console.log("deleted res", res);
+
+        if (res.success) {
+          await Swal.fire({
+            title: `${res.message}`,
+            text: "Your booking has been deleted.",
+            icon: "success",
+          });
+        }
+      }
+    } catch (error: any) {
+      Swal.fire({
+        title: "Error",
+        text: error?.message || "There was an error cancelling your booking.",
+        icon: "error",
+      });
+    }
+  };
 
   if(isLoading){
     return <SmallLoading />
@@ -55,7 +85,7 @@ const Facility = () => {
                     alt={facility.name}
                     src={facility.image}
                     style={{
-                      height: "100%",
+                      height: "150px",
                       width: "100%",
                       objectFit: "cover",
                       borderRadius: "15px",

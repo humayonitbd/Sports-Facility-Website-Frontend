@@ -51,10 +51,6 @@ const MenuBar = () => {
        case userRole.USER_ADMIN:
          navbarItems = navbarItemGenerator(navbarPaths);
          break;
-       case userRole.USER_ADMIN:
-         navbarItems = navbarItemGenerator(navbarPaths);
-         break;
-
        default:
          break;
      }

@@ -3,103 +3,97 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import Swal from "sweetalert2";
-import { zodResolver } from "@hookform/resolvers/zod";
 import CustomForm from "../../../../../components/Form/CustomForm";
 import CustomInput from "../../../../../components/Form/CustomInput";
 import facilitiesApi from "../../../../../redux/features/facility/facilityApi";
-import { facilityZodSchema } from "../../../../../Schemas/addFacility.zod.schema";
 import SmallLoading from "../../../../../components/ui/SmallLoading";
 
 const FacilityUpdate = () => {
-    const {id} = useParams();
-    const {data:singleFacultyData, isLoading}= facilitiesApi.useSingleFacilityGetQuery(id);
-    console.log("singleFacultyData", singleFacultyData?.data);
-  const [facilityLoading, setFacilityLoading] = useState(false);
-  const navigate = useNavigate();
-  const [CreateFacilityHandler] = facilitiesApi.useAddFacilityMutation();
+    const { id } = useParams();
+    const { data: singleFacilityData, isLoading } =
+      facilitiesApi.useSingleFacilityGetQuery(id);
+    const [facilityUpdateLoading, setFacilityUpdateLoading] = useState(false);
+    const navigate = useNavigate();
+    const [updateFacility] = facilitiesApi.useUpdateSingleFacilityMutation();
 
-  const onSubmit = async (data: FieldValues) => {
-    if (!data.image) {
-      Swal.fire({
-        icon: "error",
-        title: "Please provide your profile image!",
-        showConfirmButton: false,
-        timer: 1000,
-      });
-      return;
-    }
-    setFacilityLoading(true);
+    const uploadImage = async (file: File) => {
+      const formData = new FormData();
+      formData.append("image", file);
 
-    const formData = new FormData();
-    formData.append("image", data.image);
+      try {
+        const response = await fetch(
+          `https://api.imgbb.com/1/upload?key=${
+            import.meta.env.VITE_APP_IMAGE_URL_KEY
+          }`,
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+        const result = await response.json();
 
-    try {
-      const response = await fetch(
-        `https://api.imgbb.com/1/upload?key=${
-          import.meta.env.VITE_APP_IMAGE_URL_KEY
-        }`,
-        {
-          method: "POST",
-          body: formData,
+        if (result.success) {
+          return result.data.display_url;
+        } else {
+          throw new Error("Image upload failed!");
         }
-      );
-      const result = await response.json();
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        throw error;
+      }
+    };
 
-      if (result.success) {
-        const facilityInfo = {
+    const onSubmit = async (data: FieldValues) => {
+      setFacilityUpdateLoading(true);
+
+      try {
+        // const imageUrl = data.image?.File?.name
+        //   ? await uploadImage(data.image)
+        //   : singleFacilityData?.data.image;
+        const imageFile = data.image instanceof File ? data.image : null;
+        const imageUrl = imageFile
+          ? await uploadImage(imageFile)
+          : singleFacilityData?.data.image;
+
+          console.log('image data', data.image);
+          console.log("image data file", data.image?.File);
+          console.log("image data file name", data.image?.File?.name);
+        const updateFacilityData = {
           name: data.name,
           description: data.description,
           pricePerHour: Number(data.pricePerHour),
           location: data.location,
-          image: result.data.display_url,
+          image: imageUrl,
         };
 
-        console.log("facilityInfo Data", facilityInfo);
+        const res: any = await updateFacility({ id, data: updateFacilityData });
 
-        //  Add your API call here to save the user data
-        const res: any = await CreateFacilityHandler(facilityInfo);
-        // console.log("register res", res);
         if (res?.data?.success) {
-          setFacilityLoading(false);
           Swal.fire({
             icon: "success",
             title: `${res.data.message}`,
             showConfirmButton: false,
-            timer: 1000,
+            timer: 1200,
           });
           navigate("/admin/facilities");
         } else {
-          setFacilityLoading(false);
-          Swal.fire({
-            icon: "error",
-            title: `${res?.error?.data?.message}`,
-            showConfirmButton: false,
-            timer: 1200,
-          });
+          throw new Error(res?.error?.data?.message || "Update failed!");
         }
-      } else {
-        setFacilityLoading(false);
+      } catch (error:any) {
         Swal.fire({
           icon: "error",
-          title: "Image upload failed!",
+          title: error.message || "An error occurred!",
           showConfirmButton: false,
-          timer: 1000,
+          timer: 1200,
         });
+      } finally {
+        setFacilityUpdateLoading(false);
       }
-    } catch (error) {
-      console.error("Error uploading image:", error);
-      setFacilityLoading(false);
-      Swal.fire({
-        icon: "error",
-        title: "An error occurred!",
-        showConfirmButton: false,
-        timer: 1000,
-      });
+    };
+
+    if (isLoading) {
+      return <SmallLoading />;
     }
-  };
-if (isLoading) {
-  return <SmallLoading />;
-}
   return (
     <div
       style={{
@@ -136,7 +130,7 @@ if (isLoading) {
             </h2>
             <CustomForm
               onSubmit={onSubmit}
-              resolver={zodResolver(facilityZodSchema)}
+              defaultValues={singleFacilityData?.data}
             >
               <CustomInput
                 type="text"
@@ -169,7 +163,7 @@ if (isLoading) {
                 labelColor="white"
               />
               <div style={{ textAlign: "center", marginBottom: "10px" }}>
-                <Button htmlType="submit" loading={facilityLoading}>
+                <Button htmlType="submit" loading={facilityUpdateLoading}>
                   Submit
                 </Button>
               </div>

@@ -19,6 +19,7 @@ const facilitiesApi = baseApi.injectEndpoints({
           params: params,
         };
       },
+      providesTags: ["facilities"],
       transformResponse: (response: TResponseRedux<TFacilities[]>) => {
         return {
           data: response.data,
@@ -33,16 +34,32 @@ const facilitiesApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["facilities"],
     }),
 
     singleFacilityGet: builder.query({
       query: (id) => ({
         url: `/facility/${id}`,
         method: "GET",
-       
       }),
     }),
-    
+
+    updateSingleFacility: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/facility/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["facilities"],
+    }),
+    deleteSingleFacility: builder.mutation({
+      query: (id) => ({
+        url: `/facility/${id}`,
+        method: "DELETE",
+       
+      }),
+      invalidatesTags: ["facilities"],
+    }),
   }),
 });
 
