@@ -1,11 +1,12 @@
 import { Card, Typography, Button, Row, Col, Grid } from "antd";
 import { CalendarOutlined } from "@ant-design/icons";
 import { GrLocation } from "react-icons/gr";
+import { NavLink } from "react-router-dom";
 
 // Sample data for upcoming events
 const events = [
   {
-    id: 1,
+    id: 'sadffaf2f5af5a5faf',
     name: "City Basketball Tournament",
     date: "2024-09-15",
     location: "Central Park, City Center",
@@ -13,7 +14,7 @@ const events = [
       "Join us for an exciting basketball tournament with teams from around the city.",
   },
   {
-    id: 2,
+    id: 'dfafafaf54fa2faf5fa2f',
     name: "Annual Tennis Championship",
     date: "2024-10-05",
     location: "Elite Tennis Club",
@@ -21,7 +22,7 @@ const events = [
       "Compete in our annual tennis championship and show off your skills.",
   },
   {
-    id: 3,
+    id: 'ff25f4f8f7af5fafafd',
     name: "Summer Swimming Gala",
     date: "2024-11-01",
     location: "Olympic Swimming Pool",
@@ -92,7 +93,9 @@ const UpcomingEvents = () => {
               <Paragraph style={{ fontSize: "16px" }}>
                 {event.description}
               </Paragraph>
-              <Button type="primary">View Details</Button>
+              <NavLink to={`/upcomingEventDetails/${event?.id}`}>
+                <Button type="primary">View Details</Button>
+              </NavLink>
             </Card>
           </Col>
         ))}

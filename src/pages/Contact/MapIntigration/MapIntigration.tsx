@@ -1,6 +1,4 @@
 
-import { Card } from "antd";
-
 
 const MapIntegration = () => {
   return (

@@ -4,7 +4,7 @@ import { BellOutlined } from "@ant-design/icons";
 import AdminSidebar from "./AdminSidebar";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-const { Content, Header, Sider } = Layout;
+const { Content, Header } = Layout;
 
 const AdminLayout = () => {
   const { register, handleSubmit } = useForm();

@@ -9,7 +9,7 @@ const { useBreakpoint } = Grid;
 
 const MainLayout = () => {
    const screens = useBreakpoint();
-    const contentPadding = screens.md ? "0 100px" : "0 0";
+    const contentPadding = screens.md ? "0 100px" : "0px 5px";
     return (
       <div>
         <Layout>

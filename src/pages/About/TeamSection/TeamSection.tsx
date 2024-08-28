@@ -4,7 +4,6 @@ import { Card, Row, Col, Typography, Avatar, Grid } from "antd";
 import member1 from '../../../assets/Team-member/professional photo.png';
 import member2 from '../../../assets/Team-member/Test_Image_1-removebg-preview.png';
 import member3 from '../../../assets/testimonials image/08586a25-5872-4b47-97b4-5d74678b9877.jpg'
-// import member2 from '../../../assets/testimonials image/c4a992b3-d10c-44b4-90dc-6bf5500d6e09.jpg'
 
 const { Title, Paragraph } = Typography;
 const { useBreakpoint } = Grid;

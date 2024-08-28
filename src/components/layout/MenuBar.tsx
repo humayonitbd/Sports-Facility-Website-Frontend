@@ -1,14 +1,12 @@
 import { Image,Grid } from "antd";
-import { Layout, Button, Dropdown, Space, Menu } from "antd";
-import type { MenuProps } from 'antd';
+import { Layout, Button, Dropdown, Menu } from "antd";
 import { navbarItemGenerator } from "../../utils/navbarItemGenerator";
 import CustomButton from "../ui/CustomButton";
 import { NavLink } from "react-router-dom";
 import { navbarPaths } from "../../routes/main.routes";
-import { FaUser } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 import logo from "../../assets/logo/logo.png";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import { TUser, logOut, useCurrentToken } from "../../redux/features/auth/authSlice";
 import { verifyToken } from "../../utils/verifyToken";
 import authApi from "../../redux/features/auth/authApi";
@@ -96,7 +94,7 @@ const MenuBar = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        background: "white",
+        background: "#F2F7FF",
         position: "sticky",
         top: 0,
         zIndex: 4,
@@ -113,8 +111,9 @@ const MenuBar = () => {
             src={logo}
             preview={false}
             style={{
-              width: "100%", // Adjust width to be responsive
-              height: "70px", // Maintain aspect ratio
+              width: "100%",
+              height: "70px",
+              cursor: "pointer",
             }}
           />
         </NavLink>
@@ -126,7 +125,7 @@ const MenuBar = () => {
         items={navbarItems}
         style={{
           flex: 1,
-          background: "white",
+          background: "#F2F7FF",
           borderBottom: "none",
           marginRight: "10px",
           lineHeight: "28px",
@@ -143,19 +142,21 @@ const MenuBar = () => {
             gap: "10px",
           }}
         >
-          {user?.email && <NavLink
-            to={`/${user?.role}/dashboard`}
-            style={{
-              textDecoration: "none",
-              padding: "0 5px",
-              fontSize: "16px",
-              color: "#001529",
-            }}
-          >
-            <CustomButton>Dashboard</CustomButton>
-          </NavLink>}
-          {
-             !user?.email && <NavLink
+          {user?.email && (
+            <NavLink
+              to={`/${user?.role}/dashboard`}
+              style={{
+                textDecoration: "none",
+                padding: "0 5px",
+                fontSize: "16px",
+                color: "#001529",
+              }}
+            >
+              <CustomButton>Dashboard</CustomButton>
+            </NavLink>
+          )}
+          {!user?.email && (
+            <NavLink
               to={`/login`}
               style={{
                 textDecoration: "none",
@@ -166,27 +167,26 @@ const MenuBar = () => {
             >
               <CustomButton>Login</CustomButton>
             </NavLink>
-          }
-          
-          {user && user.email && <div
-          >
-            <Dropdown menu={{ items }} placement="bottom">
-              
-              <Image
-                src={dbUser?.data?.profileImg}
-                preview={false}
-                style={{
-                  width: "45px", 
-                  height: "45px", 
-                  borderRadius:'100%'
-                }}
-              />
-            </Dropdown>
-          </div>}
+          )}
 
+          {user && user.email && (
+            <div>
+              <Dropdown menu={{ items }} placement="bottom">
+                <Image
+                  src={dbUser?.data?.profileImg}
+                  preview={false}
+                  style={{
+                    width: "45px",
+                    height: "45px",
+                    borderRadius: "100%",
+                    cursor: "pointer",
+                  }}
+                />
+              </Dropdown>
+            </div>
+          )}
         </div>
       </div>
-     
     </Header>
   );
 };

@@ -1,5 +1,5 @@
 import { TQueryParams, TResponseRedux } from "../../../types";
-import { TAvailableTime, TFacilities } from "../../../types/facilities.type";
+import { TAvailableTime } from "../../../types/facilities.type";
 import { baseApi } from "../../api/baseApi";
 
 const availableTimeSlotsApi = baseApi.injectEndpoints({

@@ -2,7 +2,7 @@ import FacilityCard from "../../components/ui/FacilityCard";
 import SearchFilters from "../../components/ui/SearchFilters";
 import facilitiesApi from "../../redux/features/facility/facilityApi";
 import { useState, useEffect, useCallback } from "react";
-import {Row, Col, Grid} from "antd";
+import {Row, Col, Grid, Pagination} from "antd";
 import { TFacilities } from "../../types/facilities.type";
 import { debounce } from "lodash";
 import SmallLoading from "../../components/ui/SmallLoading";
@@ -10,10 +10,13 @@ import SmallLoading from "../../components/ui/SmallLoading";
 const { useBreakpoint } = Grid;
 const Facilities = () => {
    const screens = useBreakpoint();
+    const [page, setPage] = useState(1);
     const [facilities, setFacilities] = useState<TFacilities[]>([]);
   const [filteredFacilities, setFilteredFacilities] = useState<TFacilities[]>([]);
   const { data: facilitiess, isLoading } =
-    facilitiesApi.useGetAllFacilitiesQuery(null);
+    facilitiesApi.useGetAllFacilitiesQuery([{ name: "page", value: page }]);
+    const totalData = facilitiess?.meta;
+    console.log('total data', totalData)
 
     useEffect(() => {
       if (facilitiess?.data) {
@@ -70,6 +73,13 @@ const Facilities = () => {
               </Col>
             ))}
           </Row>
+          <div style={{marginTop:'40px', display:"flex", justifyContent:'center', alignItems:'center'}}>
+            <Pagination
+              pageSize={totalData?.limit}
+              onChange={(value) => setPage(value)}
+              total={totalData?.total}
+            />
+          </div>
         </Col>
       </Row>
     );

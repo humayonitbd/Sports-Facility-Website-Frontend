@@ -15,7 +15,7 @@ const FeaturedFacilities = () => {
     return (
       <div
         style={{
-          padding: screens.md ? "60px 100px" : "40px",
+          padding: screens.md ? "60px 100px" : "40px 5px",
           backgroundColor: "#f2f7ff",
           borderBottom: "5px solid #fff",
         }}

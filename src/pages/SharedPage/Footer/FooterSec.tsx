@@ -6,7 +6,7 @@ import footerlog from "../../../assets/logo/logo.png"
 
 const FooterSec = () => {
   return (
-    <div>
+    <div >
       <Row gutter={24}>
         <Col span={24}>
           <Row gutter={24} style={{ padding: "60px 0" }}>

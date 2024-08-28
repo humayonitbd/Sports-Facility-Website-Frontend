@@ -1,9 +1,12 @@
+import ProtectedRoute from "../components/layout/ProtectedRoute";
 import About from "../pages/About/About";
+import BookingFacility from "../pages/BookingFacility/BookingFacility";
 import Contact from "../pages/Contact/Contact";
 import Facilities from "../pages/Facilities/Facilities";
 import FeaturedFacilityDetails from "../pages/FeaturedFacilities/FeaturedFacilityDetails";
 import LandingPage from "../pages/LandingPage/LandingPage/LandingPage";
 import Login from "../pages/Login/Login/Login";
+import UpcomingEventsDetails from "../pages/UpcomingEventsDetails/UpcomingEventsDetails";
 
 
 
@@ -27,9 +30,20 @@ export const navbarPaths = [
     element: <Facilities />,
   },
   {
-    
     path: "facilities/:id",
     element: <FeaturedFacilityDetails />,
+  },
+  {
+    path: "booking/facility/:id",
+    element: (
+      <ProtectedRoute role="user">
+        <BookingFacility />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "upcomingEventDetails/:id",
+    element: <UpcomingEventsDetails />,
   },
   {
     name: "About",
