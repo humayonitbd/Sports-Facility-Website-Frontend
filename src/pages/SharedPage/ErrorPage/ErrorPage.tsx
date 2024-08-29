@@ -64,7 +64,7 @@ const ErrorPage = () => {
           <NavLink to="/">
             <Button
               type="primary"
-              style={{ backgroundColor: "#F01543", borderColor: "#F01543" }}
+              style={{ backgroundColor: "#0566FF", borderColor: "#0566FF", color:'white' }}
             >
               Back to home
             </Button>
@@ -72,7 +72,6 @@ const ErrorPage = () => {
         </div>
       </Col>
     </Row>
-   
   );
 };
 

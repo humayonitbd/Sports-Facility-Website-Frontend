@@ -7,6 +7,7 @@ import {
 } from "../../redux/features/auth/authSlice";
 import { Navigate, useLocation } from "react-router-dom";
 import { verifyToken } from "../../utils/verifyToken";
+import Swal from "sweetalert2";
 
 export type TProtectedRoute = {
   children: ReactNode;
@@ -25,6 +26,12 @@ const ProtectedRoute = ({ children, role }: TProtectedRoute) => {
   const dispatch = useAppDispatch();
   const location = useLocation();
   if (role !== undefined && role !== (user as TUser)?.role) {
+    Swal.fire({
+      icon: "error",
+      title: `You are not unauthorized access`,
+      showConfirmButton: false,
+      timer: 1200,
+    });
     dispatch(logOut());
     return <Navigate to="/login" state={{ from: location }} replace />;
   }

@@ -3,6 +3,7 @@ import {Image} from "antd"
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import footerlog from "../../../assets/logo/logo.png"
+import { FaLinkedin } from "react-icons/fa6";
 
 const FooterSec = () => {
   return (
@@ -31,54 +32,78 @@ const FooterSec = () => {
                   like real-time availability.
                 </p>
                 <div style={{ display: "flex", gap: "5px" }}>
-                  <span
-                    style={{
-                      fontSize: "20px",
-                      color: "#fff",
-                      background: "#003180",
-                      padding: "4px 8px",
-                      borderRadius: "5px",
-                      cursor: "pointer",
-                    }}
+                  <a
+                    href="https://facebook.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <FaFacebook />
-                  </span>
-                  <span
-                    style={{
-                      fontSize: "20px",
-                      color: "#fff",
-                      background: "#003180",
-                      padding: "4px 8px",
-                      borderRadius: "5px",
-                      cursor: "pointer",
-                    }}
+                    <span
+                      style={{
+                        fontSize: "20px",
+                        color: "#fff",
+                        background: "#003180",
+                        padding: "4px 8px",
+                        borderRadius: "5px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <FaFacebook />
+                    </span>
+                  </a>
+                  <a
+                    href="https://twitter.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <FaInstagram />
-                  </span>
-                  <span
-                    style={{
-                      fontSize: "20px",
-                      color: "#fff",
-                      background: "#003180",
-                      padding: "4px 8px",
-                      borderRadius: "5px",
-                      cursor: "pointer",
-                    }}
+                    <span
+                      style={{
+                        fontSize: "20px",
+                        color: "#fff",
+                        background: "#003180",
+                        padding: "4px 8px",
+                        borderRadius: "5px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <FaTwitter />
+                    </span>
+                  </a>
+                  <a
+                    href="https://instagram.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <FaTwitter />
-                  </span>
-                  <span
-                    style={{
-                      fontSize: "20px",
-                      color: "#fff",
-                      background: "#003180",
-                      padding: "4px 8px",
-                      borderRadius: "5px",
-                      cursor: "pointer",
-                    }}
+                    <span
+                      style={{
+                        fontSize: "20px",
+                        color: "#fff",
+                        background: "#003180",
+                        padding: "4px 8px",
+                        borderRadius: "5px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <FaInstagram />
+                    </span>
+                  </a>
+                  <a
+                    href="https://linkedin.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <FaYoutube />
-                  </span>
+                    <span
+                      style={{
+                        fontSize: "20px",
+                        color: "#fff",
+                        background: "#003180",
+                        padding: "4px 8px",
+                        borderRadius: "5px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <FaLinkedin />
+                    </span>
+                  </a>
                 </div>
               </div>
             </Col>
