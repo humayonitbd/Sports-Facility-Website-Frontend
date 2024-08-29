@@ -87,6 +87,15 @@ const MenuBar = () => {
          ),
        },
      ];
+     const imageStyle = {
+       width: "45px",
+       height: "45px",
+       borderRadius: "100%",
+       cursor: "pointer",
+       border: "2px solid transparent",
+       boxShadow: "0 0 10px rgba(0, 89, 230, 0.6)",
+       animation: "pulseBorder 2s infinite",
+     };
 
   return (
     <Header
@@ -168,23 +177,32 @@ const MenuBar = () => {
               <CustomButton>Login</CustomButton>
             </NavLink>
           )}
-
-          {user && user.email && (
-            <div>
+          <div>
+            {user && user.email && (
               <Dropdown menu={{ items }} placement="bottom">
                 <Image
                   src={dbUser?.data?.profileImg}
                   preview={false}
-                  style={{
-                    width: "45px",
-                    height: "45px",
-                    borderRadius: "100%",
-                    cursor: "pointer",
-                  }}
+                  style={imageStyle}
                 />
               </Dropdown>
-            </div>
-          )}
+            )}
+            <style>
+              {`
+          @keyframes pulseBorder {
+            0% {
+              box-shadow: 0 0 10px rgba(0, 89, 230, 0.6);
+            }
+            50% {
+              box-shadow: 0 0 20px rgba(0, 89, 230, 0.8);
+            }
+            100% {
+              box-shadow: 0 0 10px rgba(0, 89, 230, 0.6);
+            }
+          }
+        `}
+            </style>
+          </div>
         </div>
       </div>
     </Header>
