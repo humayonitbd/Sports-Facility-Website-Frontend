@@ -58,7 +58,7 @@ const Facilities = () => {
     return (
       <Row
         style={{
-          padding: screens.md ? "50px 100px" : "40px",
+          padding: screens.lg ? "50px 100px" : screens.md ? "50px 60px" : "40px 5px",
           background: "#F2F7FF",
         }}
       >
@@ -66,20 +66,45 @@ const Facilities = () => {
           <SearchFilters onSearch={debouncedSearch} onFilter={handleFilter} />
         </Col>
         <Col xs={24} sm={24} md={18}>
-          <Row gutter={[16, 16]}>
-            {filteredFacilities.map((facility: any) => (
-              <Col key={facility._id} xs={24} sm={12} md={8} lg={8}>
-                <FacilityCard facility={facility} />
-              </Col>
-            ))}
-          </Row>
-          <div style={{marginTop:'40px', display:"flex", justifyContent:'center', alignItems:'center'}}>
-            <Pagination
-              pageSize={totalData?.limit}
-              onChange={(value) => setPage(value)}
-              total={totalData?.total}
-            />
-          </div>
+          {filteredFacilities?.length ? (
+            <>
+              <Row gutter={[16, 16]}>
+                {filteredFacilities.map((facility: any) => (
+                  <Col key={facility._id} xs={24} sm={12} md={12} lg={8}>
+                    <FacilityCard facility={facility} />
+                  </Col>
+                ))}
+              </Row>
+              <div
+                style={{
+                  marginTop: "40px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Pagination
+                  pageSize={totalData?.limit}
+                  onChange={(value) => setPage(value)}
+                  total={totalData?.total}
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <div
+                style={{
+                  textAlign: "center",
+                  color: "#003180",
+                  fontSize: "20px",
+                }}
+              >
+                <h1 style={{ marginTop: "200px" }}>
+                  Facility is not Available!!
+                </h1>
+              </div>
+            </>
+          )}
         </Col>
       </Row>
     );

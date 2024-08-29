@@ -2,6 +2,7 @@ import AdminDashboard from "../pages/Dashboard/Admin/AdminDashboard/AdminDashboa
 import AllBookings from "../pages/Dashboard/Admin/BookingManagement/AllBookings/AllBookings";
 import CreateFacility from "../pages/Dashboard/Admin/FacilityManagement/CreateFacility/CreateFacility";
 import Facility from "../pages/Dashboard/Admin/FacilityManagement/Facility/Facility";
+import FacilityDetails from "../pages/Dashboard/Admin/FacilityManagement/FacilityDetails/FacilityDetails";
 import FacilityUpdate from "../pages/Dashboard/Admin/FacilityManagement/FacilityUpdate/FacilityUpdate";
 import AllUsers from "../pages/Dashboard/Admin/UserManagement/AllUsers/AllUsers";
 import CreateAdmin from "../pages/Dashboard/Admin/UserManagement/CreateAdmin/CreateAdmin";
@@ -35,6 +36,10 @@ export const admindashboardPaths = [
       {
         path: "facility-update/:id",
         element: <FacilityUpdate />,
+      },
+      {
+        path: "facility-details/:id",
+        element: <FacilityDetails />,
       },
     ],
   },

@@ -31,6 +31,7 @@ const BookingFacility = () => {
     const screens = useBreakpoint();
   const { id: facilityId } = useParams();
   const user = useAppSelector((state) => state.auth.user);
+   const [facilityBookingLoading, setFacilityBookingLoading] = useState(false);
   console.log("user login data", user);
   const navigate = useNavigate();
   const { data: singleFacility, isLoading } =
@@ -66,7 +67,7 @@ const BookingFacility = () => {
       navigate("/login");
       return;
     }
-
+setFacilityBookingLoading(true);
     // console.log("you are login user!!");
     const startTime = values.startTime
       ? dayjs(values.startTime).format("HH:mm")
@@ -83,13 +84,14 @@ const BookingFacility = () => {
     };
     const res = await addBooking(bookingData).unwrap();
     if (res.success) {
-      console.log(res);
-
+      // console.log(res);
+setFacilityBookingLoading(false);
       window.location.href = res.data.payment_url;
     } else {
+      setFacilityBookingLoading(false);
       console.error("Order creation failed:", res.message);
     }
-    console.log("bookingData", bookingData);
+    // console.log("bookingData", bookingData);
   };
 
   if (isLoading) {
@@ -268,6 +270,7 @@ const BookingFacility = () => {
 
             <Form.Item>
               <Button
+                loading={facilityBookingLoading}
                 type="primary"
                 style={{ padding: "20px 20px", width: "100%" }}
                 htmlType="submit"

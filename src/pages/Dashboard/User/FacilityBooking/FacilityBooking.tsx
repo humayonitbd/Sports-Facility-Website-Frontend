@@ -27,7 +27,7 @@ export type TTableData = Pick<
 
 const FacilityBooking = () => {
     const {data:bookingfacilities, isLoading,isFetching} = bookingApi.useGetAllUserBookingsQuery(null);
-    console.log("facilities booking data", bookingfacilities?.data);
+    // console.log("facilities booking data", bookingfacilities?.data);
     const [deleteBooking] = bookingApi.useDeleteBookingMutation();
     
    if (isLoading) {
@@ -151,14 +151,25 @@ const FacilityBooking = () => {
 
     return (
       <>
-        <Table
-          columns={columns}
-          loading={isFetching}
-          dataSource={tableData}
-          onChange={onChange}
-          showSorterTooltip={{ target: "sorter-icon" }}
-          pagination={false}
-        />
+        {bookingfacilities?.data?.length ? (
+          <>
+            <Table
+              columns={columns}
+              loading={isFetching}
+              dataSource={tableData}
+              onChange={onChange}
+              showSorterTooltip={{ target: "sorter-icon" }}
+              pagination={false}
+            />
+          </>
+        ) : (
+          <>
+            <div style={{ textAlign: "center", color: "#003180", fontSize:"20px" }}>
+              <h1 style={{paddingTop:"200px"}}>Booking is not Available.Please booking now!!</h1>
+            </div>
+          </>
+        )}
+
         {/* <Pagination
           pageSize={totalData?.limit}
           onChange={(value) => setPage(value)}

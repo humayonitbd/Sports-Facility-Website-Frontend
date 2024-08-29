@@ -48,7 +48,6 @@ const Facility = () => {
     return <SmallLoading />
   }
   return (
-   
     <div
       style={{
         padding: "10px",
@@ -116,7 +115,7 @@ const Facility = () => {
                     style={{ marginBottom: "15px" }}
                   />
                   <div style={{ marginTop: "15px" }}>
-                    <NavLink to={`/facilities/${facility._id}`}>
+                    <NavLink to={`/admin/facility-details/${facility._id}`}>
                       <Button
                         type="primary"
                         icon={<EyeOutlined />}

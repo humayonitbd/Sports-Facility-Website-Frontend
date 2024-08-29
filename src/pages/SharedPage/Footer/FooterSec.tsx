@@ -6,7 +6,7 @@ import footerlog from "../../../assets/logo/logo.png"
 
 const FooterSec = () => {
   return (
-    <div >
+    <div>
       <Row gutter={24}>
         <Col span={24}>
           <Row gutter={24} style={{ padding: "60px 0" }}>
@@ -25,8 +25,10 @@ const FooterSec = () => {
                     fontSize: "17px",
                   }}
                 >
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Debitis magni illum obcaecati nemo ipsam recusandae.
+                  A Sports Facility Booking Platform is an online service that
+                  allows users to easily search for and book sports venues like
+                  tennis courts, football fields, and gyms. It offers features
+                  like real-time availability.
                 </p>
                 <div style={{ display: "flex", gap: "5px" }}>
                   <span
@@ -91,7 +93,7 @@ const FooterSec = () => {
                 >
                   Company
                 </h4>
-                <NavLink to="/">
+                <NavLink to="/about">
                   <p
                     style={{
                       fontSize: "17px",
@@ -102,7 +104,7 @@ const FooterSec = () => {
                     About us
                   </p>
                 </NavLink>
-                <NavLink to="/">
+                <NavLink to="/contact">
                   <p
                     style={{
                       fontSize: "17px",
@@ -110,10 +112,10 @@ const FooterSec = () => {
                       marginBottom: "7px",
                     }}
                   >
-                    Leadership
+                    Contact us
                   </p>
                 </NavLink>
-                <NavLink to="/">
+                <NavLink to="/facilities">
                   <p
                     style={{
                       fontSize: "17px",
@@ -121,7 +123,7 @@ const FooterSec = () => {
                       marginBottom: "7px",
                     }}
                   >
-                    Careers
+                    Facility
                   </p>
                 </NavLink>
                 <NavLink to="/">

@@ -46,7 +46,7 @@ const AdminLayout = () => {
           </NavLink>
 
           {/* Center Section: Search Form */}
-          <div style={{ flexGrow: 1, textAlign: "center" }}>
+          {/* <div style={{ flexGrow: 1, textAlign: "center" }}>
             <form
               onSubmit={handleSubmit(onSubmit)}
               style={{
@@ -93,8 +93,8 @@ const AdminLayout = () => {
                 Search
               </button>
             </form>
-          </div>
-
+          </div> */}
+         
           {/* Right Section: Notification Icon */}
           <div>
             <Space>

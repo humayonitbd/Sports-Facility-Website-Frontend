@@ -49,8 +49,8 @@ const AllBookings = () => {
     }) => ({
       key: _id,
       _id,
-      userName: user.name,
-      userEmail: user.email,
+      userName: user?.name,
+      userEmail: user?.email,
       date,
       startTime,
       endTime,
@@ -93,7 +93,7 @@ const AllBookings = () => {
         // console.log(record);
         return (
           <Space>
-            <CustomModal bookingId={record._id} />
+            <CustomModal bookingId={record?._id} />
           </Space>
         );
       },
