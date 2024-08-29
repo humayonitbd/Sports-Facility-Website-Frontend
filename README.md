@@ -42,12 +42,12 @@ root
 2. NPM/Yarn: Package manager for installing dependencies.
 
 ### Clone the Repository
-git clone https://github.com/humayonitbd/Sports-Facility-Website-Frontend
-cd Sports-Facility-Website-Frontend
+1. git clone https://github.com/humayonitbd/Sports-Facility-Website-Frontend
+2. cd Sports-Facility-Website-Frontend
 
 ### Install Dependencies
 npm install
-# or
+ or
 yarn install
 
 ### Environment Variables
@@ -56,10 +56,10 @@ yarn install
 
 ### Run the Development Server
 npm run dev
-# or
+ or
 yarn start
 
 ### Build for Production
 npm run build
-# or
+ or
 yarn build

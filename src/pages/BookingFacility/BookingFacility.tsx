@@ -32,7 +32,7 @@ const BookingFacility = () => {
   const { id: facilityId } = useParams();
   const user = useAppSelector((state) => state.auth.user);
    const [facilityBookingLoading, setFacilityBookingLoading] = useState(false);
-  console.log("user login data", user);
+  // console.log("user login data", user);
   const navigate = useNavigate();
   const { data: singleFacility, isLoading } =
     facilitiesApi.useSingleFacilityGetQuery(facilityId);
@@ -82,15 +82,35 @@ setFacilityBookingLoading(true);
       facility: facilityId,
       date: currectDate ? currectDate : formateNewDate,
     };
-    const res = await addBooking(bookingData).unwrap();
-    if (res.success) {
-      // console.log(res);
-setFacilityBookingLoading(false);
-      window.location.href = res.data.payment_url;
-    } else {
+    try {
+      const res = await addBooking(bookingData).unwrap();
+   
+      if (res.success) {
+        // console.log(res);
+        setFacilityBookingLoading(false);
+        window.location.href = res.data.payment_url;
+      } else {
+        setFacilityBookingLoading(false);
+       
+      }
+      
+    } catch (error:any) {
       setFacilityBookingLoading(false);
-      console.error("Order creation failed:", res.message);
+      if(error.status){
+        Swal.fire({
+          icon: "error",
+          title: `${
+            error?.data?.message &&
+            "This facility is not available at that time!"
+          }`,
+          showConfirmButton: false,
+          timer: 1300,
+        });
+      }
+      
+      
     }
+    
     // console.log("bookingData", bookingData);
   };
 
