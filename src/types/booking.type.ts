@@ -13,6 +13,17 @@ export type TBooking = {
   updatedAt: string;
   __v: number;
 };
+export type TTableBooking = {
+  paymentStatus: string;
+  _id: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  userName: string;
+  payableAmount: number;
+  isBooked: string;
+  timeRange: string;
+};
 
 export type TFacility = {
   _id: string;

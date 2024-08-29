@@ -1,5 +1,4 @@
 import { Button, Space, Table, TableColumnsType, TableProps } from "antd";
-import bookingApi from "../../../../../redux/features/booking/bookingApi";
 import { TDBUser } from "../../../../../types/booking.type";
 import authApi from "../../../../../redux/features/auth/authApi";
 import SmallLoading from "../../../../../components/ui/SmallLoading";
@@ -71,7 +70,7 @@ const AllUsers = () => {
     {
       title: "Action",
       dataIndex: "x",
-      render: (_, record) => {
+      render: (_) => {
         // console.log(record);
         return (
           <Space>

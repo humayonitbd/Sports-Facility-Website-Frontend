@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { Card, Row, Col, Image, Button, Popconfirm } from "antd";
+import { Card, Row, Col, Image, Button } from "antd";
 import facilitiesApi from "../../../../../redux/features/facility/facilityApi";
 import { EditOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
 import SmallLoading from "../../../../../components/ui/SmallLoading";

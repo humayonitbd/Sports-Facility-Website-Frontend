@@ -11,6 +11,7 @@ import { TUser, logOut, useCurrentToken } from "../../redux/features/auth/authSl
 import { verifyToken } from "../../utils/verifyToken";
 import authApi from "../../redux/features/auth/authApi";
 import Swal from "sweetalert2";
+// import { TSidebarItem } from "../../types/route.type";
 
 
 
@@ -34,16 +35,15 @@ const MenuBar = () => {
   if (token) {
     user = verifyToken(token);
   }
-  //  console.log('menubar user', user)
+ 
   const { data: dbUser } = authApi.useUserGetQuery(user?.userId);
-  // console.log("dbUser", dbUser?.data);
+
   const userAdmin = {
     role:'userAdmin'
   }
 
-  // console.log("user", user);
+ 
      let navbarItems;
-    //  console.log("navbarItems", navbarItems);
 
      switch (userAdmin?.role) {
        case userRole.USER_ADMIN:
@@ -52,7 +52,7 @@ const MenuBar = () => {
        default:
          break;
      }
-
+console.log("navbarItems", navbarItems);
      const logOutHandler=async()=>{
       const res = await dispatch(logOut());
       if (res.type === "auth/logOut") {

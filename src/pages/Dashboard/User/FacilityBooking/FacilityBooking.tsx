@@ -2,26 +2,34 @@
 import { Button,  Space, Table, TableColumnsType, TableProps } from "antd";
 ;
 import bookingApi from "../../../../redux/features/booking/bookingApi";
-import { TBooking } from "../../../../types/booking.type";
 import { DeleteOutlined } from "@ant-design/icons";
 import CustomModal from "../../../../components/ui/CustomModal";
 import Swal from "sweetalert2";
 import SmallLoading from "../../../../components/ui/SmallLoading";
 
 
-export type TTableData = Pick<
-  TBooking,
-  | "date"
-  | "startTime"
-  | "endTime"
-  | "payableAmount"
-  | "_id"
-  | "isBooked"
-  | "paymentStatus"
-  | "user"
-> & {
-  status: string;
-  userId: string;
+// export type TTableData = Pick<
+//   TBooking,
+//   | "date"
+//   | "startTime"
+//   | "endTime"
+//   | "payableAmount"
+//   | "_id"
+//   | "isBooked"
+//   | "paymentStatus"
+//   | "user"
+// > ;
+
+export type TTableData = {
+  _id: string;
+  userName: string; // Added userName to match the tableData mapping
+  date: string;
+  startTime: string;
+  endTime: string;
+  payableAmount: number;
+  isBooked: string; // or boolean, depending on your use case
+  paymentStatus: string;
+  timeRange: string;
 };
 
 
@@ -140,9 +148,7 @@ const FacilityBooking = () => {
 
       const onChange: TableProps<TTableData>["onChange"] = (
         _pagination,
-        filters,
         _sorter,
-        extra
       ) => {
         
       };
@@ -164,8 +170,16 @@ const FacilityBooking = () => {
           </>
         ) : (
           <>
-            <div style={{ textAlign: "center", color: "#003180", fontSize:"20px" }}>
-              <h1 style={{paddingTop:"200px"}}>Booking is not Available.Please booking now!!</h1>
+            <div
+              style={{
+                textAlign: "center",
+                color: "#003180",
+                fontSize: "20px",
+              }}
+            >
+              <h1 style={{ paddingTop: "200px" }}>
+                Booking is not Available.Please booking now!!
+              </h1>
             </div>
           </>
         )}

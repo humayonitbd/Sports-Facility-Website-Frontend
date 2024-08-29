@@ -1,26 +1,26 @@
 
 import {  Space, Table, TableColumnsType, TableProps } from "antd";
 import bookingApi from "../../../../../redux/features/booking/bookingApi";
-import { TBooking } from "../../../../../types/booking.type";
 import CustomModal from "../../../../../components/ui/CustomModal";
 import SmallLoading from "../../../../../components/ui/SmallLoading";
 
-export type TTableData = Pick<
-  TBooking,
-  | "date"
-  | "startTime"
-  | "endTime"
-  | "payableAmount"
-  | "_id"
-  | "isBooked"
-  | "paymentStatus"
-  | "user"
-  | "status"
-  | "__v"
-  | "facility"
-  | "createdAt"
-  | "updatedAt"
->
+export type TTableData = {
+  _id: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  payableAmount: number;
+  isBooked: string;
+  paymentStatus: string;
+  userName: string;
+  userEmail: string;
+  timeRange: string;
+  status: string;
+  facility: string; // Using the facility name as a string
+  createdAt: string;
+  updatedAt: string;
+};
+
 
 const AllBookings = () => {
   const {
@@ -35,7 +35,8 @@ const AllBookings = () => {
    return <SmallLoading />;
  }
 
-  const tableData = bookingfacilities?.data?.map(
+const tableData: TTableData[] =
+  bookingfacilities?.data?.map(
     ({
       _id,
       date,
@@ -45,12 +46,14 @@ const AllBookings = () => {
       isBooked,
       paymentStatus,
       user,
-     
+      status,
+      facility,
+      createdAt,
+      updatedAt,
     }) => ({
-      key: _id,
       _id,
-      userName: user?.name,
-      userEmail: user?.email,
+      userName: user?.name ?? "", 
+      userEmail: user?.email ?? "",
       date,
       startTime,
       endTime,
@@ -58,8 +61,17 @@ const AllBookings = () => {
       isBooked,
       paymentStatus,
       timeRange: `${startTime} - ${endTime}`,
+      status,
+      facility: facility?.name ?? "", 
+      createdAt,
+      updatedAt,
     })
-  );
+  ) ?? [];
+
+
+
+
+
 
   const columns: TableColumnsType<TTableData> = [
     {

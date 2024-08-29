@@ -1,6 +1,6 @@
 import { Col, Row, Divider } from "antd";
 import {Image} from "antd"
-import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import footerlog from "../../../assets/logo/logo.png"
 import { FaLinkedin } from "react-icons/fa6";

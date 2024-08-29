@@ -2,15 +2,15 @@ import { Outlet, NavLink } from "react-router-dom";
 import { Layout, Space, Button } from "antd";
 import { BellOutlined } from "@ant-design/icons";
 import AdminSidebar from "./AdminSidebar";
-import { useForm, SubmitHandler } from "react-hook-form";
+// import {  SubmitHandler } from "react-hook-form";
 
 const { Content, Header } = Layout;
 
 const AdminLayout = () => {
-  const { register, handleSubmit } = useForm();
-  const onSubmit: SubmitHandler<any> = (data) => {
-    console.log(data);
-  };
+  // const { register, handleSubmit } = useForm();
+  // const onSubmit: SubmitHandler<any> = (data) => {
+  //   console.log(data);
+  // };
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
