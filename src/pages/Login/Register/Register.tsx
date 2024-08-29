@@ -21,6 +21,7 @@ const Register = () => {
   const [registerHandler] = authApi.useRegisterMutation();
 
    const onSubmit = async (data:FieldValues) => {
+    console.log('form data', data);
      if (data.password.length < 6) {
        Swal.fire({
          icon: "error",
@@ -45,7 +46,6 @@ const Register = () => {
       const formData = new FormData();
       formData.append("image", data.image);
     
-
      try {
        const response = await fetch(
          `https://api.imgbb.com/1/upload?key=${
@@ -56,8 +56,9 @@ const Register = () => {
            body: formData,
          }
        );
+       console.log('response', response);
        const result = await response.json();
-
+      console.log('image bb ', result);
        if (result.success) {
         const userInfo = {
           name: data.name,
@@ -113,6 +114,7 @@ const Register = () => {
        });
      }
    };
+  
   
 
   return (

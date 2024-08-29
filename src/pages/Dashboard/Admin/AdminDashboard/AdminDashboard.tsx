@@ -22,7 +22,7 @@ const { Title, Text } = Typography;
 const AdminDashboard = () => {
   const user = useAppSelector((state) => state.auth.user);
   const { data: userData } = authApi.useUserGetQuery(user?.userId);
-  console.log("user Data", userData?.data);
+  // console.log("user Data", userData?.data);
   const activities = [
     {
       title: "Completed task: Design homepage",

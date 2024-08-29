@@ -52,7 +52,7 @@ const MenuBar = () => {
        default:
          break;
      }
-console.log("navbarItems", navbarItems);
+// console.log("navbarItems", navbarItems);
      const logOutHandler=async()=>{
       const res = await dispatch(logOut());
       if (res.type === "auth/logOut") {
