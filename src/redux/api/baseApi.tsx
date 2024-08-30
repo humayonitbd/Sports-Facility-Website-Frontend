@@ -25,7 +25,7 @@ interface Result {
 
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://sports-facility-assinment3.vercel.app/api",
+  baseUrl: "https://sport-facility-platform-backend.vercel.app/api",
   // baseUrl: "http://localhost:5000/api",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
@@ -56,7 +56,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   if (result?.error?.status === 401) {
     try {
       const res = await fetch(
-        "https://sports-facility-assinment3.vercel.app/api/auth/refresh-token",
+        "https://sport-facility-platform-backend.vercel.app/api/auth/refresh-token",
         {
           method: "POST",
           credentials: "include",
